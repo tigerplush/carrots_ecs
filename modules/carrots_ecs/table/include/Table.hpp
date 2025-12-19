@@ -24,9 +24,9 @@ namespace CarrotsEcs
         {
         public:
             /// @brief Creates a new table with the given Components
-            /// @tparam ...Components 
-            /// @param ...components 
-            template<typename... Components>
+            /// @tparam ...Components
+            /// @param ...components
+            template <typename... Components>
             explicit Table(Components... components)
             {
                 (register_component(components), ...);
@@ -34,42 +34,48 @@ namespace CarrotsEcs
 
         public:
             /// @brief Retrieves the entity from the given row
-            /// @param row 
-            /// @return 
+            /// @param row
+            /// @return
             const Entity get_entity(TableRow row) const;
             /// @brief Retrieves the component from the given row
-            /// @param row 
-            void get_component(TableRow row) const;
+            /// @param row
+            void const *get_component(ComponentId component_id, TableRow row) const;
+            /// @brief Returns the number of entities in this table.
+            /// @return
+            size_t entity_count() const;
             /// @brief Returns the number of components registered with this table
-            /// @return 
-            size_t number_of_components() const;
+            /// @return
+            size_t component_count() const;
 
         private:
             struct ComponentIdHasher
             {
-                size_t operator()(const ComponentId& component_id) const
+                size_t operator()(const ComponentId &component_id) const
                 {
                     return component_id.hash_code();
                 }
             };
+
         private:
             std::vector<Entity> m_entities;
             std::unordered_map<ComponentId, ColumnId, ComponentIdHasher> m_component_id_to_column_id;
             std::vector<std::unique_ptr<IColumn>> m_columns;
 
         private:
-            template<typename Component>
+            template <typename Component>
             void register_component(Component component)
             {
                 ComponentId component_id = ComponentId::from<Component>();
-                if(m_component_id_to_column_id.find(component_id) == m_component_id_to_column_id.end())
+                if (m_component_id_to_column_id.find(component_id) == m_component_id_to_column_id.end())
                 {
                     ColumnId column_id(m_component_id_to_column_id.size());
                     m_component_id_to_column_id.emplace(component_id, column_id);
-                    std::unique_ptr<Column<Component>> column =  std::make_unique<Column<Component>>();
-                    m_columns.push_back(std::move(column));
+                    std::unique_ptr<Column<Component>> column = std::make_unique<Column<Component>>();
+                    m_columns.emplace_back(std::move(column));
                 }
             }
+
+            const std::unique_ptr<IColumn> &get_column(ComponentId component_id) const;
         };
     } // namespace Table
 } // namespace CarrotsEcs

@@ -15,7 +15,7 @@ struct Velocity
 TEST(TableTest, CreateTable)
 {
     Table table = Table(Position {});
-    EXPECT_EQ(table.number_of_components(), 1);
+    EXPECT_EQ(table.component_count(), 1);
     table = Table(Position {}, Velocity {});
-    EXPECT_EQ(table.number_of_components(), 2);
+    EXPECT_EQ(table.component_count(), 2);
 }

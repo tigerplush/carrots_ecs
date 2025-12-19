@@ -10,11 +10,20 @@ namespace CarrotsEcs
     namespace Table
     {
         /// A column saves all instances of a component
-        /// @tparam Component 
-        template<typename Component>
+        /// @tparam Component
+        template <typename Component>
         class Column : public IColumn
         {
         public:
+            void* at(TableRow row) override
+            {
+                return &m_components[row.id()];
+            }
+            const void* at(TableRow row) const override
+            {
+                return &m_components[row.id()];
+            }
+
         private:
             std::vector<Component> m_components;
         };

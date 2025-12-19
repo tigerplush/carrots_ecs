@@ -6,17 +6,28 @@ namespace CarrotsEcs
     {
         const Entity Table::get_entity(TableRow row) const
         {
-            return Entity(0);
+            return m_entities.at(row.id());
         }
 
-        void Table::get_component(TableRow row) const
+        void const *Table::get_component(ComponentId component_id, TableRow row) const
         {
-
+            return get_column(component_id)->at(row);
         }
 
-        size_t Table::number_of_components() const
+        size_t Table::entity_count() const
+        {
+            return m_entities.size();
+        }
+
+        size_t Table::component_count() const
         {
             return m_component_id_to_column_id.size();
+        }
+
+        const std::unique_ptr<IColumn> &Table::get_column(ComponentId component_id) const
+        {
+            ColumnId column_id = m_component_id_to_column_id.at(component_id);
+            return m_columns.at(column_id.id());
         }
     } // namespace Table
 } // namespace CarrotsEcs
