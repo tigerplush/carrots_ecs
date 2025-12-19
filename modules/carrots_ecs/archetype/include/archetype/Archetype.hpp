@@ -34,7 +34,7 @@ namespace CarrotsEcs
         private:
             std::set<std::type_index> m_signature;
         };
-    } // namespace Table
+    } // namespace Archetype
 } // namespace CarrotsEcs
 
 #endif

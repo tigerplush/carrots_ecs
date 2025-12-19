@@ -10,7 +10,7 @@ namespace CarrotsEcs
         )
         : m_signature(t_signature)
         {
-            
+
         }
-    } // namespace Table
+    } // namespace Archetype
 } // namespace CarrotsEcs

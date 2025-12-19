@@ -15,5 +15,5 @@ namespace CarrotsEcs
         }
 
         Entity Entity::PLACEHOLDER(SIZE_MAX);
-    } // namespace Table
+    } // namespace Entity
 } // namespace CarrotsEcs
