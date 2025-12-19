@@ -19,6 +19,9 @@ namespace CarrotsEcs
             }
 
         public:
+            size_t hash_code() const;
+
+        public:
             bool operator==(const ComponentId& other) const
             {
                 return m_id == other.m_id;

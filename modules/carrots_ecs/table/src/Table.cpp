@@ -16,7 +16,7 @@ namespace CarrotsEcs
 
         size_t Table::number_of_components() const
         {
-            return 0;
+            return m_component_id_to_column_id.size();
         }
     } // namespace Table
 } // namespace CarrotsEcs

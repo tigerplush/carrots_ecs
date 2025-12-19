@@ -1,4 +1,5 @@
 add_library(table STATIC
+    src/ColumnId.cpp
     src/Table.cpp
 )
 
@@ -13,6 +14,7 @@ target_sources(table
 
 target_link_libraries(table
     PUBLIC
+        component
         entity
 )
 
