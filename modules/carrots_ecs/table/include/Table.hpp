@@ -18,15 +18,25 @@ namespace CarrotsEcs
         class Table
         {
         public:
+            /// @brief Creates a new table with the given Components
+            /// @tparam ...Components 
+            /// @param ...components 
             template<typename... Components>
             explicit Table(Components... components)
             {
-
+                (register_component(components), ...);
             }
 
         public:
+            /// @brief Retrieves the entity from the given row
+            /// @param row 
+            /// @return 
             const Entity get_entity(TableRow row) const;
+            /// @brief Retrieves the component from the given row
+            /// @param row 
             void get_component(TableRow row) const;
+            /// @brief Returns the number of components registered with this table
+            /// @return 
             size_t number_of_components() const;
 
         private:
@@ -34,6 +44,11 @@ namespace CarrotsEcs
             std::vector<IColumn> m_columns;
 
         private:
+            template<typename Component>
+            void register_component(Component component)
+            {
+
+            }
         };
     } // namespace Table
 } // namespace CarrotsEcs
