@@ -23,16 +23,23 @@ namespace CarrotsEcs
         class Table
         {
         public:
-            /// @brief Creates a new table with the given Components
-            /// @tparam ...Components
-            /// @param ...components
             template <typename... Components>
-            explicit Table(Components... components)
+            static Table from()
             {
-                (register_component(components), ...);
+                Table table;
+                (table.register_component<Components>(), ...);
+                return table;
             }
 
         public:
+            template<typename... Components>
+            TableRow insert(Entity entity, Components... components)
+            {
+                TableRow row(m_entities.size());
+                m_entities.emplace_back(entity);
+                (add_component(components), ...);
+                return row;
+            }
             /// @brief Retrieves the entity from the given row
             /// @param row
             /// @return
@@ -48,6 +55,7 @@ namespace CarrotsEcs
             size_t component_count() const;
 
         private:
+            explicit Table() {}
             struct ComponentIdHasher
             {
                 size_t operator()(const ComponentId &component_id) const
@@ -63,7 +71,7 @@ namespace CarrotsEcs
 
         private:
             template <typename Component>
-            void register_component(Component component)
+            void register_component()
             {
                 ComponentId component_id = ComponentId::from<Component>();
                 if (m_component_id_to_column_id.find(component_id) == m_component_id_to_column_id.end())
@@ -73,6 +81,15 @@ namespace CarrotsEcs
                     std::unique_ptr<Column<Component>> column = std::make_unique<Column<Component>>();
                     m_columns.emplace_back(std::move(column));
                 }
+            }
+
+            template<typename Component>
+            void add_component(Component component)
+            {
+                ComponentId component_id = ComponentId::from<Component>();
+                ColumnId column_id = m_component_id_to_column_id.at(component_id);
+                Column<Component>* column = static_cast<Column<Component>*>(m_columns[column_id.id()].get());
+                column->emplace_back(component);
             }
 
             const std::unique_ptr<IColumn> &get_column(ComponentId component_id) const;

@@ -20,7 +20,7 @@ namespace CarrotsEcs
         private:
             size_t m_id;
         };
-    } // namespace Table
+    } // namespace Entity
 } // namespace CarrotsEcs
 
 #endif

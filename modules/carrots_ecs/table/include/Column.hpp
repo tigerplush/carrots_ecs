@@ -24,6 +24,11 @@ namespace CarrotsEcs
                 return &m_components[row.id()];
             }
 
+            void emplace_back(Component component)
+            {
+                m_components.emplace_back(component);
+            }
+
         private:
             std::vector<Component> m_components;
         };
