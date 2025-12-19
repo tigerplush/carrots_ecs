@@ -2,9 +2,12 @@ Hi, I'm Emily and I'm a bunny girl.
 What drives bunnies? Well, carrots of course!
 So I proudly present:
 
-# Carrots ECS
+# Carrots
 
 An open source, ECS game engine written in c++.
+
+# How to Build
+1. Create project with `cmake -S . -B build`
 
 ## Project Guidelines
 1. Everything should be in it's own module, when sensible. They can be grouped together in parent modules, but don't leak private modules.
@@ -17,4 +20,6 @@ An open source, ECS game engine written in c++.
 3. Prefix private variables with `m_`. Prefix temporary variables with `t_`
 4. Use wrapper structs to denote types that shouldn't be mixed, like `ColumnId` or `TableId`
 5. Class definitions should start with the public methods, their API so to speak
-6. Every public method has to be documented
+6. Every class and every public method has to be documented with three slashes `///`
+7. Every header has to have an inclusion guard following the scheme `<PROJECT>_<MODULE>_<SUMODULE...>_FILENAME_HPP_`, such as `CARROTS_ECS_TABLE_TABLE_HPP_`
+8. Every class has to be in a namespace of their parent module, which in turn is in the namespace of its parent module.
