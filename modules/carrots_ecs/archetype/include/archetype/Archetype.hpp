@@ -32,10 +32,19 @@ namespace CarrotsEcs
                 return m_signature != other.m_signature;
             }
 
+        public:
+            /// Returns the precomputed hash of this archetype
+            /// @return 
+            size_t hash_code() const;
+
         private:
             explicit Archetype(std::set<std::type_index> t_signature);
+            /// Calculates a hash over the signatures by using the stolen formula from boost library `combine_hash`
+            /// @return 
+            size_t calculate_hash_code() const;
         private:
             std::set<std::type_index> m_signature;
+            size_t m_hash_code;
         };
     } // namespace Archetype
 } // namespace CarrotsEcs

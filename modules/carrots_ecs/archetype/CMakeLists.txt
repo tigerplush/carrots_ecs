@@ -9,6 +9,7 @@ target_sources(archetype
             include
         FILES
             include/archetype/Archetype.hpp
+            include/archetype/ArchetypeHasher.hpp
 )
 
 # Tests
