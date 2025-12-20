@@ -41,3 +41,12 @@ TEST(TableTest, InsertComponent)
     EXPECT_EQ(pos, pos);
     EXPECT_EQ(*static_cast<const Position*>(ptr), pos);
 }
+
+TEST(TableTest, ContainsComponent)
+{
+    ComponentId position_component_id = ComponentId::from<Position>();
+    ComponentId velocity_component_id = ComponentId::from<Velocity>();
+    Table table = Table::from<Position>();
+    EXPECT_TRUE(table.contains_component(position_component_id));
+    EXPECT_FALSE(table.contains_component(velocity_component_id));
+}

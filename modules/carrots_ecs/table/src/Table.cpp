@@ -24,10 +24,15 @@ namespace CarrotsEcs
             return m_component_id_to_column_id.size();
         }
 
-        const std::unique_ptr<IColumn> &Table::get_column(ComponentId component_id) const
+        const std::unique_ptr<IColumn> &Table::get_column(const ComponentId &component_id) const
         {
             ColumnId column_id = m_component_id_to_column_id.at(component_id);
             return m_columns.at(column_id.id());
+        }
+        
+        bool Table::contains_component(const ComponentId &component_id) const
+        {
+            return m_component_id_to_column_id.find(component_id) != m_component_id_to_column_id.end();
         }
     } // namespace Table
 } // namespace CarrotsEcs

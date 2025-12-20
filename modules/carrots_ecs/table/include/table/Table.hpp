@@ -35,8 +35,8 @@ namespace CarrotsEcs
         {
         public:
             /// Creates a new Table holding given Component types.
-            /// @tparam ...Components 
-            /// @return 
+            /// @tparam ...Components
+            /// @return
             template <typename... Components>
             static Table from()
             {
@@ -44,23 +44,24 @@ namespace CarrotsEcs
                 (table.register_component<Components>(), ...);
                 return table;
             }
+
         public:
             // Disable copy constructor
-            Table(const Table&) = delete;
+            Table(const Table &) = delete;
             // Disable copy assignment
-            Table& operator=(const Table&) = delete;
+            Table &operator=(const Table &) = delete;
             // Enable move constructor
-            Table(Table&&) noexcept = default;
+            Table(Table &&) noexcept = default;
             // Enable move assignment
-            Table& operator=(Table&&) noexcept = default;
+            Table &operator=(Table &&) noexcept = default;
 
         public:
             /// @brief Inserts an Entity with it's components
-            /// @tparam ...Components 
-            /// @param entity 
-            /// @param ...components 
-            /// @return 
-            template<typename... Components>
+            /// @tparam ...Components
+            /// @param entity
+            /// @param ...components
+            /// @return
+            template <typename... Components>
             TableRow insert(Entity entity, Components... components)
             {
                 TableRow row(m_entities.size());
@@ -82,6 +83,11 @@ namespace CarrotsEcs
             /// @brief Returns the number of components registered with this table
             /// @return
             size_t component_count() const;
+
+            /// Returns if this table contains a given ComponentId
+            /// @param component_id
+            /// @return
+            bool contains_component(const ComponentId &component_id) const;
 
         private:
             explicit Table() {}
@@ -112,16 +118,16 @@ namespace CarrotsEcs
                 }
             }
 
-            template<typename Component>
+            template <typename Component>
             void add_component(Component component)
             {
                 ComponentId component_id = ComponentId::from<Component>();
                 ColumnId column_id = m_component_id_to_column_id.at(component_id);
-                Column<Component>* column = static_cast<Column<Component>*>(m_columns[column_id.id()].get());
+                Column<Component> *column = static_cast<Column<Component> *>(m_columns[column_id.id()].get());
                 column->emplace_back(component);
             }
 
-            const std::unique_ptr<IColumn> &get_column(ComponentId component_id) const;
+            const std::unique_ptr<IColumn> &get_column(const ComponentId &component_id) const;
         };
     } // namespace Table
 } // namespace CarrotsEcs
