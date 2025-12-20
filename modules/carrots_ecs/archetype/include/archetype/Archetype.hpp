@@ -8,7 +8,10 @@ namespace CarrotsEcs
 {
     namespace Archetype
     {
-        /// An Archetype is a unique combination of Components
+        /// An Archetype is a unique combination of Component signatures.
+        ///
+        /// `Archetype::from<Position>()` would create different Archetype to `Archetype::from<Velocity>()`,
+        /// but `Archetype::from<Position, Velocity>()` would produce the same Archetype as `Archetype::from<Velocity, Position>()`.
         class Archetype
         {
         public:

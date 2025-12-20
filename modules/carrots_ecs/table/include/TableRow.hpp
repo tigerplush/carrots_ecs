@@ -5,7 +5,11 @@ namespace CarrotsEcs
 {
     namespace Table
     {
-        /// A table saves all entities and their components of a specific archetype
+        /// An Id for an Entity within a table.
+        ///
+        /// # Remarks
+        /// A `TableRow` is only unique within a table. If you use a TableRow of one table
+        /// in another table, it won't produce valid results.
         class TableRow
         {
         public:

@@ -7,7 +7,9 @@ namespace CarrotsEcs
 {
     namespace Component
     {
-        /// An Archetype is a unique combination of Components
+        /// A ComponentId is a unique signature of a component.
+        ///
+        /// `ComponentId::from<Velocity>()` will create a different ComponentId from `ComponentId::from<Position>()`.
         class ComponentId
         {
         public:

@@ -19,10 +19,24 @@ namespace CarrotsEcs
     {
         using ComponentId = CarrotsEcs::Component::ComponentId;
         using Entity = CarrotsEcs::Entity::Entity;
-        /// A table saves all entities and their components of a specific archetype
+        /// A table saves all entities and their components of a specific archetype in columns.
+        ///
+        /// Visually, you can imagine a table as
+        /// | Entities  | Column1   | Column2   | ... | ColumnN    |
+        /// |-----------|-----------|-----------|-----|------------|
+        /// | Entity(0) | Position0 | Velocity0 | ... | Component0 |
+        /// | Entity(1) | Position1 | Velocity1 | ... | Component1 |
+        /// | Entity(3) | Position3 | Velocity3 | ... | Component3 |
+        ///
+        /// If Entities with a different archetype are spawned in between, they will land in another
+        /// table, so EntityIds will not be consecutive (and they don't have to be).
+        /// The table will ensure, that an Entity in row 0 will have all it's components in row 0 of all the columns.
         class Table
         {
         public:
+            /// Creates a new Table holding given Component types.
+            /// @tparam ...Components 
+            /// @return 
             template <typename... Components>
             static Table from()
             {
@@ -32,6 +46,11 @@ namespace CarrotsEcs
             }
 
         public:
+            /// @brief Inserts an Entity with it's components
+            /// @tparam ...Components 
+            /// @param entity 
+            /// @param ...components 
+            /// @return 
             template<typename... Components>
             TableRow insert(Entity entity, Components... components)
             {
@@ -44,7 +63,8 @@ namespace CarrotsEcs
             /// @param row
             /// @return
             const Entity get_entity(TableRow row) const;
-            /// @brief Retrieves the component from the given row
+
+            /// @brief Retrieves a void const ptr to a component from the given column and row
             /// @param row
             void const *get_component(ComponentId component_id, TableRow row) const;
             /// @brief Returns the number of entities in this table.

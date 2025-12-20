@@ -5,7 +5,7 @@ namespace CarrotsEcs
 {
     namespace Entity
     {
-        /// An entity is the glue, that holds components together.
+        /// An Entity represents an object in the World.
         class Entity
         {
         public:
