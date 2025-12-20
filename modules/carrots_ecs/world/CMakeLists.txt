@@ -1,4 +1,5 @@
 add_library(world STATIC
+    src/EntityMeta.cpp
     src/World.cpp
 )
 

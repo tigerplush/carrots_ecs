@@ -44,6 +44,15 @@ namespace CarrotsEcs
                 (table.register_component<Components>(), ...);
                 return table;
             }
+        public:
+            // Disable copy constructor
+            Table(const Table&) = delete;
+            // Disable copy assignment
+            Table& operator=(const Table&) = delete;
+            // Enable move constructor
+            Table(Table&&) noexcept = default;
+            // Enable move assignment
+            Table& operator=(Table&&) noexcept = default;
 
         public:
             /// @brief Inserts an Entity with it's components
