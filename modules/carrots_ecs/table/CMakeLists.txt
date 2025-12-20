@@ -1,6 +1,7 @@
 add_library(table STATIC
     src/ColumnId.cpp
     src/Table.cpp
+    src/TableId.cpp
     src/TableRow.cpp
 )
 
