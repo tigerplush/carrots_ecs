@@ -32,7 +32,7 @@ namespace CarrotsEcs
             ///
             /// # Remarks
             ///
-            /// I'm not sure about register_table<...>. It checks, if there is a table for an archetype already.
+            /// I'm not sure about register_table<...>. It checks if there is a table for an archetype already.
             /// We check a second time in this function. I think this could be simplified, have to think about that.
             /// @tparam ...Components
             /// @param ...components
@@ -49,13 +49,20 @@ namespace CarrotsEcs
                 // Now, a table definitely exists
                 Entity entity(m_entities.size());
                 TableId table_id = m_archetype_to_table_id.at(archetype);
-                Table& table = m_tables[table_id.id()];
+                Table &table = m_tables[table_id.id()];
                 TableRow table_row = table.insert(entity, components...);
                 m_entities.emplace_back(EntityMeta(table_id, table_row));
                 return entity;
             }
 
+            /// Returns if the world is currently empty, meaning it has no Entities.
+            /// @return 
             bool is_empty() const;
+
+            const std::vector<Table> &get_tables() const
+            {
+                return m_tables;
+            }
 
         private:
             std::vector<Table> m_tables;
