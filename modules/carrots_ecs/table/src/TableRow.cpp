@@ -1,4 +1,4 @@
-#include "TableRow.hpp"
+#include "table/TableRow.hpp"
 
 namespace CarrotsEcs
 {

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "Table.hpp"
+#include "table/Table.hpp"
 
 using namespace CarrotsEcs::Entity;
 using namespace CarrotsEcs::Table;

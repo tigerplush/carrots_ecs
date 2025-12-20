@@ -10,7 +10,7 @@ target_sources(table
         BASE_DIRS
             include
         FILES
-            include/Table.hpp
+            include/table/Table.hpp
 )
 
 target_link_libraries(table
