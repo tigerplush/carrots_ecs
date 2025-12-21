@@ -114,7 +114,8 @@ namespace CarrotsStd
                 return accumulator;
             }
 
-            /// Counts the number of elements in this iterator
+            /// Counts the number of elements in this iterator, thus
+            /// consuming it.
             /// @return 
             size_t count()
             {
