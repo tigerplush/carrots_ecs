@@ -4,16 +4,21 @@
 #include "table/Table.hpp"
 #include "world/World.hpp"
 
+#include "Components.hpp"
+#include "Filters.hpp"
 #include "QueryIterator.hpp"
 
 namespace CarrotsEcs
 {
     namespace Query
     {
+        template <typename ComponentQuery, typename FilterQuery = Filters<>>
+        class Query;
+
         using Table = CarrotsEcs::Table::Table;
         using World = CarrotsEcs::World::World;
-        template <typename... ComponentsOrFilters>
-        class Query
+        template<typename... ComponentContent, typename... FilterContent>
+        class Query<Components<ComponentContent...>, Filters<FilterContent...>>
         {
         public:
             Query(

@@ -14,7 +14,7 @@ TEST(QueryTest, CreateQuery)
 {
     World world;
     world.spawn(Position {});
-    Query<Position&> query = Query<Position&>(world);
+    Query<Components<Position&>> query = Query<Components<Position&>>(world);
     EXPECT_EQ(query.iter().count(), 1);
     EXPECT_EQ(query.count(), 1);
 }
