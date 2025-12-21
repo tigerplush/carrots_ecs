@@ -12,6 +12,7 @@ target_sources(iterator
 
 target_link_libraries(iterator
     INTERFACE
+    option
 )
 
 

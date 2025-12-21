@@ -3,6 +3,8 @@
 
 #include <functional>
 
+#include "option/Option.hpp"
+
 namespace CarrotsStd
 {
     namespace Iterator
@@ -33,6 +35,7 @@ namespace CarrotsStd
                 iterator()
                 : m_iter(nullptr)
                 , m_end(true)
+                , m_value(Option::None)
                 {
                 }
 
@@ -43,6 +46,7 @@ namespace CarrotsStd
                 )
                 : m_iter(t_iter)
                 , m_end(false)
+                , m_value(Option::None)
                 {
                     advance();
                 }
@@ -50,7 +54,7 @@ namespace CarrotsStd
             public:
                 OutputType operator*()
                 {
-                    return *m_value;
+                    return m_value.unwrap();
                 }
                 iterator &operator++()
                 {
@@ -68,7 +72,7 @@ namespace CarrotsStd
             private:
                 Iterator<OutputType> *m_iter;
                 bool m_end;
-                std::shared_ptr<OutputType> m_value;
+                Option::Option<OutputType> m_value;
             private:
                 void advance()
                 {
@@ -79,7 +83,7 @@ namespace CarrotsStd
                     }
 
                     m_value = m_iter->next();
-                    m_end = (nullptr == m_value);
+                    m_end = (Option::None == m_value);
                 }
             };
         public:
@@ -101,10 +105,10 @@ namespace CarrotsStd
             B fold(B init, std::function<B(B, const OutputType&)> f)
             {
                 B accumulator = init;
-                std::shared_ptr<OutputType> x = next();
-                while(nullptr != x)
+                Option::Option<OutputType> x = next();
+                while(Option::None != x)
                 {
-                    accumulator = f(accumulator, *x);
+                    accumulator = f(accumulator, x.unwrap());
                     x = next();
                 }
                 return accumulator;
@@ -120,7 +124,7 @@ namespace CarrotsStd
                 });
             }
         public:
-            virtual std::shared_ptr<OutputType> next() = 0;
+            virtual Option::Option<OutputType> next() = 0;
         };
     } // namespace Iterator
 } // namespace CarrotsStd

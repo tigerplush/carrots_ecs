@@ -3,6 +3,7 @@
 #include "iterator/Iterator.hpp"
 
 using namespace CarrotsStd::Iterator;
+using namespace CarrotsStd::Option;
 
 class Counter : public Iterator<size_t>
 {
@@ -18,15 +19,15 @@ public:
     {
     }
 
-    std::shared_ptr<OutputType> next() override
+    Option<OutputType> next() override
     {
         if(m_current >= m_to)
         {
-            return nullptr;
+            return None;
         }
         size_t temp = m_current;
         m_current += 1;
-        return std::make_shared<size_t>(temp);
+        return Option(temp);
     }
 private:
     size_t m_from;
@@ -43,6 +44,17 @@ TEST(IteratorTest, CreateIterator)
         EXPECT_EQ(index, i);
         i += 1;
     }
+}
+
+TEST(IteratorTest, IteratorNext)
+{
+    Counter counter(0, 5);
+    EXPECT_EQ(counter.next(), Some(0ull));
+    EXPECT_EQ(counter.next(), Some(1ull));
+    EXPECT_EQ(counter.next(), Some(2ull));
+    EXPECT_EQ(counter.next(), Some(3ull));
+    EXPECT_EQ(counter.next(), Some(4ull));
+    EXPECT_EQ(counter.next(), None);
 }
 
 TEST(IteratorTest, CountIterator)
