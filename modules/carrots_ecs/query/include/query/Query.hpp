@@ -63,7 +63,12 @@ namespace CarrotsEcs
 
             const size_t row_count(TableId table_id) const override
             {
-                return m_world.get_tables()[table_id.id()].entity_count();
+                return get_table(table_id).entity_count();
+            }
+
+            const Table &get_table(TableId table_id) const override
+            {
+                return m_world.get_tables()[table_id.id()];
             }
         private:
             void extract_components()
