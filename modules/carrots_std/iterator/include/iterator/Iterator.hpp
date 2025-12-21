@@ -1,0 +1,128 @@
+#ifndef CARROTS_STD_ITERATOR_ITERATOR_HPP_
+#define CARROTS_STD_ITERATOR_ITERATOR_HPP_
+
+#include <functional>
+
+namespace CarrotsStd
+{
+    namespace Iterator
+    {
+        /// Iterator class to iterate over a collection of items.
+        ///
+        /// Iterator is lazily evaluated, which means there doesn't have to
+        /// be a known fixed size beforehand. Keep in mind that iterators are
+        /// stateful, so they can be consumed.
+        ///
+        /// # Remarks
+        ///
+        /// It is strongly recommended not to implement this for any class you want to
+        /// iterate over. Rather you should implement this for an Iterator class, e.g.
+        /// you want to iterate over values of a `class Range`, then implement this
+        /// Iterator for `class RangeIterator` and return `RangeIterator` from `iter()` because
+        /// traversing an iterator consumes it and calling `.count()` and then iterating over
+        /// the same iterator would lead to empty results.
+        /// @tparam OutputType 
+        template<typename OutputType>
+        class Iterator
+        {
+        public:
+            struct iterator
+            {
+            public:
+                /// Creates an empty iterator that will serve es `.end()`
+                iterator()
+                : m_iter(nullptr)
+                , m_end(true)
+                {
+                }
+
+                /// Creates an iterator from it's parent class
+                /// @param t_iter 
+                iterator(
+                    Iterator<OutputType> *t_iter
+                )
+                : m_iter(t_iter)
+                , m_end(false)
+                {
+                    advance();
+                }
+
+            public:
+                OutputType operator*()
+                {
+                    return *m_value;
+                }
+                iterator &operator++()
+                {
+                    advance();
+                    return *this;
+                }
+                bool operator==(iterator& other) const
+                {
+                    return m_end == other.m_end;
+                }
+                bool operator!=(iterator& other) const
+                {
+                    return !(*this == other);
+                }
+            private:
+                Iterator<OutputType> *m_iter;
+                bool m_end;
+                std::shared_ptr<OutputType> m_value;
+            private:
+                void advance()
+                {
+                    if(nullptr == m_iter)
+                    {
+                        m_end = true;
+                        return;
+                    }
+
+                    m_value = m_iter->next();
+                    m_end = (nullptr == m_value);
+                }
+            };
+        public:
+            iterator begin()
+            {
+                return iterator(this);
+            }
+            iterator end()
+            {
+                return iterator();
+            }
+        public:
+            /// Folds every element into an accumulator by applying an operation, returning the final result.
+            /// @tparam B 
+            /// @param init 
+            /// @param f 
+            /// @return 
+            template<typename B>
+            B fold(B init, std::function<B(B, const OutputType&)> f)
+            {
+                B accumulator = init;
+                std::shared_ptr<OutputType> x = next();
+                while(nullptr != x)
+                {
+                    accumulator = f(accumulator, *x);
+                    x = next();
+                }
+                return accumulator;
+            }
+
+            /// Counts the number of elements in this iterator
+            /// @return 
+            size_t count()
+            {
+                return fold<size_t>(0, [](size_t count, OutputType) {
+                    count += 1;
+                    return count;
+                });
+            }
+        public:
+            virtual std::shared_ptr<OutputType> next() = 0;
+        };
+    } // namespace Iterator
+} // namespace CarrotsStd
+
+#endif
