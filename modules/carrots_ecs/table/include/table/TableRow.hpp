@@ -29,6 +29,14 @@ namespace CarrotsEcs
             {
                 return m_id > other.m_id;
             }
+            bool operator>=(const size_t& other) const
+            {
+                return m_id >= other;
+            }
+            bool operator>=(const TableRow& other) const
+            {
+                return m_id >= other.m_id;
+            }
         private:
             size_t m_id;
         };
