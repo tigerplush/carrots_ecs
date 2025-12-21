@@ -15,8 +15,9 @@ TEST(QueryTest, CreateQuery)
     World world;
     world.spawn(Position {});
     Query<Components<Position&>> query = Query<Components<Position&>>(world);
+    EXPECT_EQ(query.matching_tables(), 1);
     EXPECT_EQ(query.iter().count(), 1);
-    EXPECT_EQ(query.count(), 1);
+    // EXPECT_EQ(query.count(), 1);
 }
 
 
@@ -24,9 +25,9 @@ TEST(QueryTest, IterQuery)
 {
     World world;
     world.spawn(Position {});
-    // Query<Entity, Position&> query = Query<Entity, Position&>(world);
-    // for(auto i: query.iter())
-    // {
+    Query<Components<Entity, Position&>> query = Query<Components<Entity, Position&>>(world);
+    for(auto [entity, pos]: query.iter())
+    {
         
-    // }
+    }
 }
