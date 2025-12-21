@@ -59,10 +59,8 @@ namespace CarrotsEcs
             /// @return 
             bool is_empty() const;
 
-            const std::vector<Table> &get_tables() const
-            {
-                return m_tables;
-            }
+            const std::vector<Table> &get_tables() const;
+            const std::unordered_map<Archetype, TableId, ArchetypeHasher> &get_archetypes() const;
 
         private:
             std::vector<Table> m_tables;
