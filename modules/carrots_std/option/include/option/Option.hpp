@@ -21,7 +21,7 @@ namespace CarrotsStd
                 : m_has_value(false)
                 {
                 }
-            constexpr Option(T t_value)
+            explicit constexpr Option(T t_value)
                 : m_has_value(true)
                 , m_value(std::move(t_value))
                 {
@@ -42,6 +42,11 @@ namespace CarrotsStd
                 return !(*this == other);
             }
         public:
+            T unwrap() const
+            {
+                assert(is_some() && "called `Option::unwrap()` on a `None` value");
+                return m_value;
+            }
             bool is_some() const
             {
                 return m_has_value;

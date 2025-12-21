@@ -5,16 +5,29 @@ using namespace CarrotsStd::Option;
 
 TEST(OptionTest, OptionNone)
 {
-    Option<int> lhs = None;
-    Option<int> rhs = None;
-    Option<int> some_rhs = Some(5);
-    EXPECT_EQ(lhs, rhs);
-    EXPECT_NE(lhs, Some(5));
-    EXPECT_NE(None, Some(5));
+    Option<int> none = None;
+    EXPECT_TRUE(none.is_none());
+    EXPECT_FALSE(none.is_some());
 }
 
 TEST(OptionTest, OptionSome)
 {
-    EXPECT_EQ(Some(5), Some(5));
-    EXPECT_NE(Some(5), Some(7));
+    Option<int> some = Some(5);
+    EXPECT_TRUE(some.is_some());
+    EXPECT_FALSE(some.is_none());
+}
+
+TEST(OptionTest, OptionCompare)
+{
+    Option<int> none = None;
+    Option<int> some = Some(5);
+    EXPECT_NE(some, none);
+}
+
+TEST(OptionTest, OptionUnwrap)
+{
+    EXPECT_EQ(Some(5).unwrap(), 5);
+    EXPECT_NE(Some(5).unwrap(), 7);
+    Option<int> panic = None;
+    EXPECT_DEATH({panic.unwrap();}, "");
 }
