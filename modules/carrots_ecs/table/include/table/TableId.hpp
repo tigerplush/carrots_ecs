@@ -15,6 +15,20 @@ namespace CarrotsEcs
         public:
             TableId(size_t t_id);
             size_t id() const;
+        public:
+            TableId& operator+=(const size_t &other)
+            {
+                m_id += other;
+                return *this;
+            }
+            bool operator>(const size_t& other) const
+            {
+                return m_id > other;
+            }
+            bool operator>(const TableId& other) const
+            {
+                return m_id > other.m_id;
+            }
         private:
             size_t m_id;
         };
