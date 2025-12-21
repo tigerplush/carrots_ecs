@@ -14,9 +14,19 @@ namespace CarrotsEcs
 
         }
 
+        const std::set<std::type_index> &Archetype::get_signature() const
+        {
+            return m_signature;
+        }
+
         size_t Archetype::hash_code() const
         {
             return m_hash_code;
+        }
+
+        bool Archetype::contains(const std::type_index &other) const
+        {
+            return m_signature.find(other) != m_signature.end();
         }
 
         size_t Archetype::calculate_hash_code() const

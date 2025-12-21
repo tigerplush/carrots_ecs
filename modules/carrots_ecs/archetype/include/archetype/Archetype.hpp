@@ -21,6 +21,10 @@ namespace CarrotsEcs
                 std::set<std::type_index> t_signature = {std::type_index(typeid(Components))...};
                 return Archetype(t_signature);
             }
+        public:
+            Archetype()
+            {
+            }
 
         public:
             bool operator==(const Archetype& other) const
@@ -33,9 +37,11 @@ namespace CarrotsEcs
             }
 
         public:
+            const std::set<std::type_index> &get_signature() const;
             /// Returns the precomputed hash of this archetype
             /// @return 
             size_t hash_code() const;
+            bool contains(const std::type_index &other) const;
 
         private:
             explicit Archetype(std::set<std::type_index> t_signature);
