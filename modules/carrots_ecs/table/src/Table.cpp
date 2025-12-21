@@ -4,7 +4,7 @@ namespace CarrotsEcs
 {
     namespace Table
     {
-        const Entity Table::get_entity(TableRow row) const
+        const Entity &Table::get_entity(TableRow row) const
         {
             return m_entities.at(row.id());
         }

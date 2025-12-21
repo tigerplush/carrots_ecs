@@ -72,8 +72,9 @@ namespace CarrotsEcs
             /// @brief Retrieves the entity from the given row
             /// @param row
             /// @return
-            const Entity get_entity(TableRow row) const;
+            const Entity &get_entity(TableRow row) const;
 
+            const std::unique_ptr<IColumn> &get_column(const ComponentId &component_id) const;
             /// @brief Retrieves a void const ptr to a component from the given column and row
             /// @param row
             void const *get_component(ComponentId component_id, TableRow row) const;
@@ -126,8 +127,6 @@ namespace CarrotsEcs
                 Column<Component> *column = static_cast<Column<Component> *>(m_columns[column_id.id()].get());
                 column->emplace_back(component);
             }
-
-            const std::unique_ptr<IColumn> &get_column(const ComponentId &component_id) const;
         };
     } // namespace Table
 } // namespace CarrotsEcs
