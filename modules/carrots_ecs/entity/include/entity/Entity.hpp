@@ -13,6 +13,8 @@ namespace CarrotsEcs
         public:
             static Entity PLACEHOLDER;
         public:
+            size_t id() const;
+        public:
             bool operator!=(const Entity& other) const
             {
                 return m_id != other.m_id;
