@@ -13,60 +13,121 @@ namespace CarrotsStd
 
         inline constexpr NoneType None{};
 
-        template<typename T>
+        template <typename T>
         class Option
         {
+        private:
+            // Use pointer storage for references, direct storage for non-references
+            using StorageType = std::conditional_t<std::is_reference_v<T>,
+                                                   std::remove_reference_t<T> *,
+                                                   T>;
+
         public:
             constexpr Option(NoneType) noexcept
                 : m_has_value(false)
-                {
-                }
+            {
+            }
+
             explicit constexpr Option(T t_value)
                 : m_has_value(true)
-                , m_value(std::move(t_value))
+            {
+                if constexpr (std::is_reference_v<T>)
                 {
+                    new (&m_storage) StorageType(&t_value);
                 }
+                else
+                {
+                    new (&m_storage) T(std::move(t_value));
+                }
+            }
+
+            ~Option()
+            {
+                if (m_has_value)
+                {
+                    reinterpret_cast<StorageType *>(&m_storage)->~StorageType();
+                }
+            }
+
         public:
             bool operator==(const Option<T> &other) const
             {
                 bool both_none = is_none() && other.is_none();
                 bool both_some = is_some() && other.is_some();
-                return both_none || (both_some && (m_value == other.m_value));
+                return both_none || (both_some && (value() == other.value()));
             }
+
             bool operator==(const NoneType &other) const
             {
                 return is_none();
             }
+
             bool operator!=(const Option<T> &other) const
             {
                 return !(*this == other);
             }
+
         public:
             T unwrap() const
             {
                 assert(is_some() && "called `Option::unwrap()` on a `None` value");
-                return m_value;
+                return value();
             }
+
             bool is_some() const
             {
                 return m_has_value;
             }
+
             bool is_none() const
             {
                 return !is_some();
             }
+
+        private:
+            T value() const
+            {
+                if constexpr (std::is_reference_v<T>)
+                {
+                    return **reinterpret_cast<const StorageType *>(&m_storage);
+                }
+                else
+                {
+                    return *reinterpret_cast<const T *>(&m_storage);
+                }
+            }
+
+            T value()
+            {
+                if constexpr (std::is_reference_v<T>)
+                {
+                    return **reinterpret_cast<StorageType *>(&m_storage);
+                }
+                else
+                {
+                    return *reinterpret_cast<T *>(&m_storage);
+                }
+            }
+
         private:
             bool m_has_value;
-            T m_value;
+            std::aligned_storage_t<sizeof(StorageType), alignof(StorageType)> m_storage;
         };
 
-        template<typename T>
-        Option<std::decay_t<T>> Some(T&& value)
+        // For lvalue references - preserve the reference
+        template <typename T>
+        Option<T &> Some(T &value)
+        {
+            return Option<T &>(value);
+        }
+
+        // For rvalues - take by value
+        template <typename T>
+        Option<std::decay_t<T>> Some(T &&value)
         {
             return Option<std::decay_t<T>>(std::forward<T>(value));
         }
     } // namespace Option
 } // namespace CarrotsStd
-
 
 #endif

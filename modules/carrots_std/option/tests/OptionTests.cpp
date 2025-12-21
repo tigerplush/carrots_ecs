@@ -31,3 +31,10 @@ TEST(OptionTest, OptionUnwrap)
     Option<int> panic = None;
     EXPECT_DEATH({panic.unwrap();}, "");
 }
+
+TEST(OptionTest, OptionRef)
+{
+    int number = 5;
+    Option<int&> some = Some(number);
+    EXPECT_EQ(some.unwrap(), 5);
+}

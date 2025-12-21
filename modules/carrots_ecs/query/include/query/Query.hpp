@@ -35,52 +35,12 @@ namespace CarrotsEcs
             {
                 return iter().count();
             }
-        // // Iterator helpers
-        // private:
-        //     /// Struct to discern if a given anonymous type is a filter
-        //     /// @tparam ComponentOrFilter 
-        //     template<typename ComponentOrFilter>
-        //     struct is_filter : std::false_type
-        //     {
-        //     };
-
-        //     /// Static helper function to check if something is a Component
-        //     /// @tparam ComponentOrFilter 
-        //     template<typename ComponentOrFilter>
-        //     static constexpr bool is_component = !is_filter<ComponentOrFilter>::value;
-
-        //     template<typename... Ignores>
-        //     struct extract_components;
-
-        //     /// Helper struct to create an empty tuple type, if no Components have been added to the filter
-        //     template<>
-        //     struct extract_components<>
-        //     {
-        //         using type = std::tuple<>;
-        //     };
-
-        //     /// Helper struct to extract all components from the template
-        //     /// @tparam ComponentOrFilter 
-        //     /// @tparam ...Rest 
-        //     template<typename ComponentOrFilter, typename... Rest>
-        //     struct extract_components<ComponentOrFilter, Rest...>
-        //     {
-        //         using rest_type = typename extract_components<Rest...>::type;
-        //         using type = std::conditional_t<
-        //             is_component<ComponentOrFilter>,
-        //             decltype(std::tuple_cat(std::declval<std::tuple<ComponentOrFilter>>(), std::declval<rest_type>())),
-        //             rest_type
-        //         >;
-        //     };
-        // // Iterator functions
-        // public:
-        //     using ComponentTuple = typename extract_components<ComponentsOrFilters...>::type;
         public:
             /// Returns an iterator over all tuples
             /// @return 
-            QueryIterator<int> iter() const
+            QueryIterator<std::tuple<ComponentContent...>> iter() const
             {
-                return QueryIterator<int>();
+                return QueryIterator<std::tuple<ComponentContent...>>();
             }
 
         private:
