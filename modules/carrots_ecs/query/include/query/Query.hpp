@@ -4,6 +4,8 @@
 #include "table/Table.hpp"
 #include "world/World.hpp"
 
+#include "QueryIterator.hpp"
+
 namespace CarrotsEcs
 {
     namespace Query
@@ -26,100 +28,59 @@ namespace CarrotsEcs
         public:
             size_t count() const
             {
-                return m_components.size();
+                return iter().count();
             }
-        // Iterator helpers
-        private:
-            /// Struct to discern if a given anonymous type is a filter
-            /// @tparam ComponentOrFilter 
-            template<typename ComponentOrFilter>
-            struct is_filter : std::false_type
-            {
-            };
+        // // Iterator helpers
+        // private:
+        //     /// Struct to discern if a given anonymous type is a filter
+        //     /// @tparam ComponentOrFilter 
+        //     template<typename ComponentOrFilter>
+        //     struct is_filter : std::false_type
+        //     {
+        //     };
 
-            /// Static helper function to check if something is a Component
-            /// @tparam ComponentOrFilter 
-            template<typename ComponentOrFilter>
-            static constexpr bool is_component = !is_filter<ComponentOrFilter>::value;
+        //     /// Static helper function to check if something is a Component
+        //     /// @tparam ComponentOrFilter 
+        //     template<typename ComponentOrFilter>
+        //     static constexpr bool is_component = !is_filter<ComponentOrFilter>::value;
 
-            template<typename... Ignores>
-            struct extract_components;
+        //     template<typename... Ignores>
+        //     struct extract_components;
 
-            /// Helper struct to create an empty tuple type, if no Components have been added to the filter
-            template<>
-            struct extract_components<>
-            {
-                using type = std::tuple<>;
-            };
+        //     /// Helper struct to create an empty tuple type, if no Components have been added to the filter
+        //     template<>
+        //     struct extract_components<>
+        //     {
+        //         using type = std::tuple<>;
+        //     };
 
-            /// Helper struct to extract all components from the template
-            /// @tparam ComponentOrFilter 
-            /// @tparam ...Rest 
-            template<typename ComponentOrFilter, typename... Rest>
-            struct extract_components<ComponentOrFilter, Rest...>
-            {
-                using rest_type = typename extract_components<Rest...>::type;
-                using type = std::conditional_t<
-                    is_component<ComponentOrFilter>,
-                    decltype(std::tuple_cat(std::declval<std::tuple<ComponentOrFilter>>(), std::declval<rest_type>())),
-                    rest_type
-                >;
-            };
-        // Iterator functions
+        //     /// Helper struct to extract all components from the template
+        //     /// @tparam ComponentOrFilter 
+        //     /// @tparam ...Rest 
+        //     template<typename ComponentOrFilter, typename... Rest>
+        //     struct extract_components<ComponentOrFilter, Rest...>
+        //     {
+        //         using rest_type = typename extract_components<Rest...>::type;
+        //         using type = std::conditional_t<
+        //             is_component<ComponentOrFilter>,
+        //             decltype(std::tuple_cat(std::declval<std::tuple<ComponentOrFilter>>(), std::declval<rest_type>())),
+        //             rest_type
+        //         >;
+        //     };
+        // // Iterator functions
+        // public:
+        //     using ComponentTuple = typename extract_components<ComponentsOrFilters...>::type;
         public:
-            using ComponentTuple = typename extract_components<ComponentsOrFilters...>::type;
-
-            struct Iterator
+            /// Returns an iterator over all tuples
+            /// @return 
+            QueryIterator<int> iter() const
             {
-            public:
-                Iterator(
-                    Query<ComponentsOrFilters...> t_query,
-                    size_t t_index
-                )
-                : m_query(t_query)
-                , m_index(t_index)
-                {
-
-                }
-            public:
-                ComponentTuple operator*() const
-                {
-                    return m_query.m_components[m_index];
-                }
-
-                Iterator &operator++()
-                {
-                    m_index += 1;
-                    return *this;
-                }
-
-                bool operator!=(const Iterator &other) const
-                {
-                    return m_index != other.m_index;
-                }
-
-                bool operator==(const Iterator &other) const
-                {
-                    return m_index == other.m_index;
-                }
-            private:
-                Query<ComponentsOrFilters...> m_query;
-                size_t m_index;
-            };
-
-            Iterator begin()
-            {
-                return Iterator(*this, 0);
-            }
-
-            Iterator end()
-            {
-                return Iterator(*this, m_components.size());
+                return QueryIterator<int>();
             }
 
         private:
             World &m_world;
-            std::vector<ComponentTuple> m_components;
+            // std::vector<ComponentTuple> m_components;
         };
     } // namespace Query
 } // namespace CarrotsEcs

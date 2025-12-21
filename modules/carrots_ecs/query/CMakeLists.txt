@@ -8,11 +8,13 @@ target_sources(query
             include
         FILES
             include/query/Query.hpp
+            include/query/QueryIterator.hpp
 )
 
 target_link_libraries(query
     INTERFACE
         world
+        carrots_std
 )
 
 
