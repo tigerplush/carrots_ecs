@@ -92,6 +92,7 @@ target_link_libraries({lowercase_name}
     PUBLIC
 )
 
+set_target_properties({lowercase_name} PROPERTIES FOLDER "modules/carrots_std/{lowercase_name}")
 
 # Tests
 add_executable({lowercase_name}_tests
