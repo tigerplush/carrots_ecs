@@ -7,6 +7,7 @@ target_sources(iterator
         BASE_DIRS
             include
         FILES
+            include/iterator/Filter.hpp
             include/iterator/Iterator.hpp
 )
 
@@ -18,6 +19,7 @@ target_link_libraries(iterator
 
 # Tests
 add_executable(iterator_tests
+    tests/FilterTests.cpp
     tests/IteratorTests.cpp
 )
 

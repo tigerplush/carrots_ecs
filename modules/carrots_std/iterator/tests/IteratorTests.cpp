@@ -71,3 +71,10 @@ TEST(IteratorTest, FoldIterator)
         return acc;
     }), 5);
 }
+
+TEST(IteratorTest, FindIterator)
+{
+    Counter counter(0, 5);
+    EXPECT_EQ(counter.find([](const Counter::OutputType &element) { return element == 3;}), Some(3ull));
+    EXPECT_EQ(counter.find([](const Counter::OutputType &element) { return element == 100;}), None);
+}

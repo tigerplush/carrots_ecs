@@ -9,6 +9,9 @@ namespace CarrotsStd
 {
     namespace Iterator
     {
+        // Forward declaration of Filter
+        template<typename OutputType>
+        class Filter; 
         /// Iterator class to iterate over a collection of items.
         ///
         /// Iterator is lazily evaluated, which means there doesn't have to
@@ -112,6 +115,33 @@ namespace CarrotsStd
                     x = next();
                 }
                 return accumulator;
+            }
+
+
+            /// Finds the first element in the iterator that matches the predicate
+            /// @param f 
+            /// @return Option of element, None if no element could be found
+            Option::Option<OutputType> find(std::function<bool(const OutputType&)> f)
+            {
+                Option::Option<OutputType> x = next();
+                while(Option::None != x)
+                {
+                    if(f(x.unwrap()))
+                    {
+                        return x;
+                    }
+                    x = next();
+                }
+                return Option::None;
+            }
+
+            /// Filters an iterator after a predicate and returns an iterator to the filtered values.
+            /// This filtered iterator is lazily evaluated and consumes it's parent.
+            /// @param f 
+            /// @return 
+            Filter<OutputType> filter(std::function<bool(const OutputType&)> f)
+            {
+                return Filter<OutputType>(this, f);
             }
 
             /// Counts the number of elements in this iterator, thus
