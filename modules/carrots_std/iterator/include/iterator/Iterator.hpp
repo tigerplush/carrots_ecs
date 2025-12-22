@@ -154,6 +154,23 @@ namespace CarrotsStd
                     return count;
                 });
             }
+
+            template<typename Collection>
+            Collection collect()
+            {
+                Collection collection;
+                Option::Option<OutputType> x = next();
+                while(Option::None != x)
+                {
+                    if(x.is_some())
+                    {
+                        collection.emplace_back(x.unwrap());
+                    }
+                    x = next();
+                }
+                return collection;
+            }
+
         public:
             virtual Option::Option<OutputType> next() = 0;
         };

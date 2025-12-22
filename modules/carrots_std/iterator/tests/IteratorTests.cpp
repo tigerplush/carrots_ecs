@@ -78,3 +78,12 @@ TEST(IteratorTest, FindIterator)
     EXPECT_EQ(counter.find([](const Counter::OutputType &element) { return element == 3;}), Some(3ull));
     EXPECT_EQ(counter.find([](const Counter::OutputType &element) { return element == 100;}), None);
 }
+
+
+TEST(IteratorTest, CollectIterator)
+{
+    Counter counter(0, 5);
+    std::vector<size_t> lhs = counter.collect<std::vector<size_t>>();
+    std::vector<size_t> rhs = {0, 1, 2, 3, 4};
+    EXPECT_EQ(lhs, rhs);
+}
