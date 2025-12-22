@@ -1,6 +1,8 @@
 #ifndef CARROTS_STD_OPTION_OPTION_HPP_
 #define CARROTS_STD_OPTION_OPTION_HPP_
 
+#include <type_traits>
+
 namespace CarrotsStd
 {
     namespace Option
@@ -72,6 +74,15 @@ namespace CarrotsStd
             {
                 assert(is_some() && "called `Option::unwrap()` on a `None` value");
                 return value();
+            }
+
+            T unwrap_or(T value_when_none) const
+            {
+                if(is_some())
+                {
+                    return value();
+                }
+                return value_when_none;
             }
 
             bool is_some() const
