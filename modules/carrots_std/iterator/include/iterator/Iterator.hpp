@@ -9,6 +9,9 @@ namespace CarrotsStd
 {
     namespace Iterator
     {
+        // Forward declaration of Enumerate
+        template<typename OutputType>
+        class Enumerate;
         // Forward declaration of Filter
         template<typename OutputType>
         class Filter;
@@ -99,6 +102,39 @@ namespace CarrotsStd
                 return iterator();
             }
         public:
+
+            template<typename Collection>
+            Collection collect()
+            {
+                Collection collection;
+                Option::Option<OutputType> x = next();
+                while(Option::None != x)
+                {
+                    if(x.is_some())
+                    {
+                        collection.emplace_back(x.unwrap());
+                    }
+                    x = next();
+                }
+                return collection;
+            }
+
+            /// Counts the number of elements in this iterator, thus
+            /// consuming it.
+            /// @return 
+            size_t count()
+            {
+                return fold<size_t>(0, [](size_t count, OutputType) {
+                    count += 1;
+                    return count;
+                });
+            }
+
+            Enumerate<OutputType> enumerate()
+            {
+                return Enumerate<OutputType>(this);
+            }
+
             /// Folds every element into an accumulator by applying an operation, returning the final result.
             /// @tparam B 
             /// @param init 
@@ -116,7 +152,6 @@ namespace CarrotsStd
                 }
                 return accumulator;
             }
-
 
             /// Finds the first element in the iterator that matches the predicate
             /// @param f 
@@ -142,33 +177,6 @@ namespace CarrotsStd
             Filter<OutputType> filter(std::function<bool(const OutputType&)> f)
             {
                 return Filter<OutputType>(this, f);
-            }
-
-            /// Counts the number of elements in this iterator, thus
-            /// consuming it.
-            /// @return 
-            size_t count()
-            {
-                return fold<size_t>(0, [](size_t count, OutputType) {
-                    count += 1;
-                    return count;
-                });
-            }
-
-            template<typename Collection>
-            Collection collect()
-            {
-                Collection collection;
-                Option::Option<OutputType> x = next();
-                while(Option::None != x)
-                {
-                    if(x.is_some())
-                    {
-                        collection.emplace_back(x.unwrap());
-                    }
-                    x = next();
-                }
-                return collection;
             }
 
         public:

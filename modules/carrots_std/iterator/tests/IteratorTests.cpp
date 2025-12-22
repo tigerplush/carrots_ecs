@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "iterator/Enumerate.hpp"
 #include "iterator/Iterator.hpp"
 
 using namespace CarrotsStd::Iterator;
@@ -86,4 +87,18 @@ TEST(IteratorTest, CollectIterator)
     std::vector<size_t> lhs = counter.collect<std::vector<size_t>>();
     std::vector<size_t> rhs = {0, 1, 2, 3, 4};
     EXPECT_EQ(lhs, rhs);
+}
+
+
+
+TEST(IteratorTest, EnumerateIterator)
+{
+    Counter counter(5, 10);
+    Enumerate enumerate = counter.enumerate();
+    EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{0, 5}));
+    EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{1, 6}));
+    EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{2, 7}));
+    EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{3, 8}));
+    EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{4, 9}));
+    EXPECT_EQ(enumerate.next(), None);
 }

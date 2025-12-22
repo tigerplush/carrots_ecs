@@ -8,6 +8,7 @@ target_sources(iterator
         BASE_DIRS
             include
         FILES
+            include/iterator/Enumerate.hpp
             include/iterator/Filter.hpp
             include/iterator/Iterator.hpp
             include/iterator/Split.hpp
