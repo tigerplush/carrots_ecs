@@ -5,7 +5,7 @@ add_executable(seedling
 
 target_link_libraries(seedling
     PRIVATE
-    iterator
+    carrots_std
 )
 
 include(FetchContent)
@@ -18,5 +18,4 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(cli11_proj)
 
-# And now you can use it
 target_link_libraries(seedling PRIVATE CLI11::CLI11)

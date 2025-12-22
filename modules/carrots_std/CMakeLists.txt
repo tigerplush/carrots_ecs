@@ -12,7 +12,7 @@ target_sources(carrots_std
             include/CarrotsStd.hpp
 )
 
-target_link_libraries(world
+target_link_libraries(carrots_std
     INTERFACE
         iterator
         option

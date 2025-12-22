@@ -1,6 +1,6 @@
 #include "Crate.hpp"
 
-#include "iterator/StringIterator.hpp"
+#include "CarrotsStd.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -27,7 +27,6 @@ namespace crate
         std::string lowercase_name = name.to_lowercase();
         std::string uppercase_name = name.to_uppercase();
         StringIterator module_name(options.module_name);
-        std::string module_define = options.module_name;
         std::vector<std::string> folder_structure = {
             options.path + "/" + lowercase_name + "/include/" + lowercase_name,
             options.path + "/" + lowercase_name + "/src",
