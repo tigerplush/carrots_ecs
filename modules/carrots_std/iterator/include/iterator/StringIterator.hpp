@@ -45,7 +45,7 @@ namespace CarrotsStd
                        });
                 return lowercase;
             }
-            Split split(std::function<bool(const OutputType&)> f);
+            Split split(std::string delimiter);
         public:
             Option::Option<OutputType> next() override
             {

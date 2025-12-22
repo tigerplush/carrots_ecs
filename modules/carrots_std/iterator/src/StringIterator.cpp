@@ -6,9 +6,9 @@ namespace CarrotsStd
 {
     namespace Iterator
     {
-        Split StringIterator::split(std::function<bool(const OutputType&)> f)
+        Split StringIterator::split(std::string delimiter)
         {
-            return Split();
+            return Split(m_string, delimiter);
         }
     } // namespace Iterator
 } // namespace CarrotsStd
