@@ -8,7 +8,17 @@ namespace CarrotsApp
         {
             return App::empty();
         }
-        
+
+        void App::update()
+        {
+            m_sub_apps.update();
+        }
+
+        App &App::add_system(std::function<void()> system)
+        {
+            m_sub_apps.get_main_app().add_system(system);
+            return *this;
+        }
         size_t App::run()
         {
             return m_runner(*this);

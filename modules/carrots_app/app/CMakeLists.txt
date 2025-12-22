@@ -1,5 +1,6 @@
 add_library(app STATIC
     src/App.cpp
+    src/SubApp.cpp
 )
 
 target_sources(app
@@ -9,6 +10,9 @@ target_sources(app
             include
         FILES
             include/app/App.hpp
+            include/app/IApp.hpp
+            include/app/SubApp.hpp
+            include/app/SubApps.hpp
 )
 
 target_link_libraries(app

@@ -1,6 +1,5 @@
 add_subdirectory(app)
 
-
 add_library(carrots_app INTERFACE)
 
 target_sources(carrots_app

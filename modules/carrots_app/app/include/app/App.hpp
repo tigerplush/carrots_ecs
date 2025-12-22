@@ -4,19 +4,24 @@
 #include <functional>
 
 #include "option/Option.hpp"
+#include "IApp.hpp"
+#include "SubApps.hpp"
 
 namespace CarrotsApp
 {
     namespace App
     {
         using namespace CarrotsStd::Option;
-        class App
+        class App : public IApp
         {
         public:
             using RunnerFn = std::function<size_t(App&)>;
         public:
             static App create();
         public:
+            void update() override;
+        public:
+            App &add_system(std::function<void()>);
             size_t run();
             Option<size_t> should_exit();
         private:
@@ -24,6 +29,7 @@ namespace CarrotsApp
         private:
             explicit App(RunnerFn m_runner);
         private:
+            SubApps m_sub_apps;
             RunnerFn m_runner;
         };
 
