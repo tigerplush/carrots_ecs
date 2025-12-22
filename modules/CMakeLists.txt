@@ -1,2 +1,3 @@
+add_subdirectory(carrots_app)
 add_subdirectory(carrots_ecs)
 add_subdirectory(carrots_std)
