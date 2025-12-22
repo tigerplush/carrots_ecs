@@ -19,3 +19,4 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(modules)
+add_subdirectory(tools)

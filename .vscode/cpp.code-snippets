@@ -1,0 +1,22 @@
+{
+    "ModuleHeader" : {
+        "scope": "cpp",
+        "prefix": "module_header",
+        "body": [
+            "#ifndef ${RELATIVE_FILEPATH/(.*\\/)?include\\///${1:/replace:\\/|\\./_}/:/upcase}_",
+            "#define ${RELATIVE_FILEPATH/(.*\\/)?include\\///${1:/replace:\\/|\\./_}/:/upcase}_",
+            "",
+            "namespace ${RELATIVE_FILEPATH/.*\\/([^\\/]+)\\/([^\\/]+)\\/include\\/.*/${1:/pascalcase}/}",
+            "{",
+            "    namespace ${RELATIVE_FILEPATH/.*\\/([^\\/]+)\\/([^\\/]+)\\/include\\/.*/${2:/pascalcase}/}",
+            "    {",
+            "",
+            "    ${1}",
+            "",
+            "    } // namespace ${RELATIVE_FILEPATH/.*\\/([^\\/]+)\\/([^\\/]+)\\/include\\/.*/${2:/pascalcase}/}",
+            "} // namespace ${RELATIVE_FILEPATH/.*\\/([^\\/]+)\\/([^\\/]+)\\/include\\/.*/${1:/pascalcase}/}",
+            "",
+            "#endif"
+        ]
+    }
+}
