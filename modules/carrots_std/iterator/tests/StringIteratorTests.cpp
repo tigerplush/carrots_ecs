@@ -9,6 +9,6 @@ TEST(StringIteratorTests, CreateIterator)
 {
     std::string test = "test";
     StringIterator iter(test);
-    EXPECT_EQ(iter.next(), Some(test));
+    EXPECT_EQ(iter.next().unwrap(), test);
     EXPECT_EQ(iter.next(), None);
 }
