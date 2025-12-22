@@ -20,6 +20,7 @@ target_link_libraries(iterator
     option
 )
 
+set_target_properties(iterator PROPERTIES FOLDER "modules/carrots_std/iterator")
 
 # Tests
 add_executable(iterator_tests

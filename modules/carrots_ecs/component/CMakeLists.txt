@@ -11,6 +11,8 @@ target_sources(component
             include/component/ComponentId.hpp
 )
 
+set_target_properties(component PROPERTIES FOLDER "modules/carrots_ecs/component")
+
 # Tests
 add_executable(component_tests
     tests/ComponentIdTests.cpp

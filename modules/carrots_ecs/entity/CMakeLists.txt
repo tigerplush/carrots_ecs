@@ -11,6 +11,8 @@ target_sources(entity
             include/entity/Entity.hpp
 )
 
+set_target_properties(entity PROPERTIES FOLDER "modules/carrots_ecs/entity")
+
 # Tests
 add_executable(entity_tests
     tests/EntityTests.cpp

@@ -17,3 +17,4 @@ target_link_libraries(carrots_std
         iterator
         option
 )
+set_target_properties(carrots_std PROPERTIES FOLDER "modules/carrots_std")

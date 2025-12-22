@@ -18,6 +18,7 @@ target_link_libraries(world
         table
 )
 
+set_target_properties(world PROPERTIES FOLDER "modules/carrots_ecs/world")
 
 # Tests
 add_executable(world_tests

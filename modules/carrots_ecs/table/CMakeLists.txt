@@ -20,6 +20,7 @@ target_link_libraries(table
         entity
 )
 
+set_target_properties(table PROPERTIES FOLDER "modules/carrots_ecs/table")
 
 # Tests
 add_executable(table_tests

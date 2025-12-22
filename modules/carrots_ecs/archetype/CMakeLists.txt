@@ -12,6 +12,8 @@ target_sources(archetype
             include/archetype/ArchetypeHasher.hpp
 )
 
+set_target_properties(archetype PROPERTIES FOLDER "modules/carrots_ecs/archetype")
+
 # Tests
 add_executable(archetype_tests
     tests/ArchetypeTests.cpp

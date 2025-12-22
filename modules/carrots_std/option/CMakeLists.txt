@@ -15,6 +15,7 @@ target_link_libraries(option
     PUBLIC
 )
 
+set_target_properties(option PROPERTIES FOLDER "modules/carrots_std/option")
 
 # Tests
 add_executable(option_tests

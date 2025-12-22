@@ -17,6 +17,7 @@ target_link_libraries(query
         carrots_std
 )
 
+set_target_properties(query PROPERTIES FOLDER "modules/carrots_ecs/query")
 
 # Tests
 add_executable(query_tests
