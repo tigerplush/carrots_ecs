@@ -23,6 +23,7 @@ namespace CarrotsStd
             , m_string(t_string)
             {
             }
+            explicit StringIterator(std::string &&str) = delete;
         public:
             std::string to_uppercase()
             {

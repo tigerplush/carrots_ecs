@@ -7,7 +7,8 @@ using namespace CarrotsStd::Option;
 
 TEST(StringIteratorTests, CreateIterator)
 {
-    StringIterator iter("test");
-    EXPECT_TRUE(iter.next() == Some(std::string("test")));
+    std::string test = "test";
+    StringIterator iter(test);
+    EXPECT_EQ(iter.next(), Some(test));
     EXPECT_EQ(iter.next(), None);
 }
