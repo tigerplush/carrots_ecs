@@ -11,7 +11,7 @@ namespace CarrotsStd
     {
         // Forward declaration of Filter
         template<typename OutputType>
-        class Filter; 
+        class Filter;
         /// Iterator class to iterate over a collection of items.
         ///
         /// Iterator is lazily evaluated, which means there doesn't have to

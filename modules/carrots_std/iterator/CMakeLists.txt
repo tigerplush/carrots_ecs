@@ -1,4 +1,5 @@
-add_library(iterator INTERFACE
+add_library(iterator STATIC
+    src/StringIterator.cpp
 )
 
 target_sources(iterator
@@ -9,10 +10,12 @@ target_sources(iterator
         FILES
             include/iterator/Filter.hpp
             include/iterator/Iterator.hpp
+            include/iterator/Split.hpp
+            include/iterator/StringIterator.hpp
 )
 
 target_link_libraries(iterator
-    INTERFACE
+    PUBLIC
     option
 )
 
@@ -21,6 +24,7 @@ target_link_libraries(iterator
 add_executable(iterator_tests
     tests/FilterTests.cpp
     tests/IteratorTests.cpp
+    tests/StringIteratorTests.cpp
 )
 
 target_link_libraries(iterator_tests
