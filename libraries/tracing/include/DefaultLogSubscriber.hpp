@@ -78,7 +78,6 @@ namespace Tracing
             auto it = m_filter.find(module);
             if(it != m_filter.end())
             {
-                std::cout << module << std::endl;
                 return severity >= it->second;
             }
             return false;
