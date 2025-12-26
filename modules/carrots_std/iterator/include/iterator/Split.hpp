@@ -1,6 +1,8 @@
 #ifndef CARROTS_STD_ITERATOR_SPLIT_HPP_
 #define CARROTS_STD_ITERATOR_SPLIT_HPP_
 
+#include <string>
+
 #include "Iterator.hpp"
 
 namespace CarrotsStd
