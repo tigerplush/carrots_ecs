@@ -11,5 +11,5 @@ void hello_world()
 
 int main()
 {
-    return App::create().add_system(hello_world).run();
+    return App::create().add_system(Startup, hello_world).run();
 }

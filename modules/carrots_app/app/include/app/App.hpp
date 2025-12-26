@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "option/Option.hpp"
+#include "CarrotsEcs.hpp"
 #include "IApp.hpp"
 #include "SubApps.hpp"
 
@@ -12,6 +13,7 @@ namespace CarrotsApp
     namespace App
     {
         using namespace CarrotsStd::Option;
+        using ScheduleLabel = CarrotsEcs::Schedule::ScheduleLabel;
         class App : public IApp
         {
         public:
@@ -21,7 +23,7 @@ namespace CarrotsApp
         public:
             void update() override;
         public:
-            App &add_system(std::function<void()>);
+            App &add_system(ScheduleLabel label, std::function<void()> system);
             size_t run();
             Option<size_t> should_exit();
         private:

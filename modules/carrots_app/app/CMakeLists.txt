@@ -11,6 +11,7 @@ target_sources(app
         FILES
             include/app/App.hpp
             include/app/IApp.hpp
+            include/app/MainSchedule.hpp
             include/app/SubApp.hpp
             include/app/SubApps.hpp
 )
@@ -18,6 +19,7 @@ target_sources(app
 target_link_libraries(app
     PUBLIC
     carrots_std
+    carrots_ecs
 )
 
 set_target_properties(app PROPERTIES FOLDER "modules/carrots_std/app")
