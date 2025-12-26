@@ -4,6 +4,9 @@ add_library(app STATIC
     src/SubApp.cpp
 )
 
+
+target_compile_definitions(app PRIVATE TRACING_LOG_MODULE_NAME="carrots_app::app")
+
 target_sources(app
     PUBLIC
         FILE_SET HEADERS
@@ -19,6 +22,7 @@ target_sources(app
 
 target_link_libraries(app
     PUBLIC
+    tracing
     carrots_std
     carrots_ecs
     plugin

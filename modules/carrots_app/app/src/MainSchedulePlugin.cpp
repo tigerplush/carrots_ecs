@@ -1,6 +1,6 @@
 #include "app/MainSchedulePlugin.hpp"
 
-#include <iostream>
+#include <Tracing.hpp>
 
 namespace CarrotsApp
 {
@@ -8,7 +8,8 @@ namespace CarrotsApp
     {
         void MainSchedulePlugin::build(IApp &app)
         {
-            std::cout << "main schedule plugin added" << std::endl;
+            TRACE << "Building MainSchedulePlugin";
+            TRACE << "Done building MainSchedulePlugin";
         }
     } // namespace App
 } // namespace CarrotsApp
