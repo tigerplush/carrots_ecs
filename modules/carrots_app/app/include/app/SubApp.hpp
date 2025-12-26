@@ -20,6 +20,7 @@ namespace CarrotsApp
         {
         public:
             void update() override;
+            void add_plugin(IPlugin &&plugin) override;
         public:
             void add_system(ScheduleLabel label, std::function<void()> system);
         };

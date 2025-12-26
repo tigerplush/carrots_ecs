@@ -1,5 +1,6 @@
 add_library(app STATIC
     src/App.cpp
+    src/MainSchedulePlugin.cpp
     src/SubApp.cpp
 )
 
@@ -20,6 +21,7 @@ target_link_libraries(app
     PUBLIC
     carrots_std
     carrots_ecs
+    plugin
 )
 
 set_target_properties(app PROPERTIES FOLDER "modules/carrots_std/app")

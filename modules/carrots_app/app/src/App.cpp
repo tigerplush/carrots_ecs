@@ -1,17 +1,24 @@
 #include "app/App.hpp"
 
+#include "app/MainSchedulePlugin.hpp"
+
 namespace CarrotsApp
 {
     namespace App
     {
         App App::create()
         {
-            return App::empty();
+            return App::standard();
         }
 
         void App::update()
         {
             m_sub_apps.update();
+        }
+
+        void App::add_plugin(IPlugin &&plugin)
+        {
+            plugin.build(*this);
         }
 
         App &App::add_system(ScheduleLabel label, std::function<void()> system)
@@ -32,6 +39,12 @@ namespace CarrotsApp
         App App::empty()
         {
             return App(run_once);
+        }
+        App App::standard()
+        {
+            App app = App::empty();
+            app.add_plugin(MainSchedulePlugin());
+            return app;
         }
 
         App::App(RunnerFn t_runner)

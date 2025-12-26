@@ -1,12 +1,15 @@
 #ifndef CARROTS_APP_APP_I_APP_HPP_
 #define CARROTS_APP_APP_I_APP_HPP_
 
+#include "plugin/Plugin.hpp"
 
 namespace CarrotsApp
 {
     namespace App
     {
+        using IPlugin = CarrotsApp::Plugin::IPlugin;
         /// App interface
+        ///
         /// Internally, plugins are basically AppBuilders.
         /// So if you add a plugin, the app will call `.build` on that plugin
         /// which will return a SubApp, that is added to the main apps list
@@ -15,6 +18,7 @@ namespace CarrotsApp
         {
         public:
             virtual void update() = 0;
+            virtual void add_plugin(IPlugin &&plugin) = 0;
         };
     } // namespace App
 } // namespace CarrotsApp

@@ -33,11 +33,13 @@ namespace CarrotsApp
         public:
             using RunnerFn = std::function<size_t(App&)>;
         public:
-            /// Creates an empty app.
+            /// Creates an new app with some default structure to enable core engine features.
+            /// This is the preferred constructor for most cases.
             /// @return 
             static App create();
         public:
             void update() override;
+            void add_plugin(IPlugin &&plugin) override;
         public:
             /// Adds a system to a schedule.
             /// @param label 
@@ -62,6 +64,10 @@ namespace CarrotsApp
             /// then return
             /// @return 
             static App empty();
+            /// Creates an new app with some default structure to enable core engine features.
+            /// This is the preferred constructor for most cases.
+            /// @return 
+            static App standard();
         private:
             /// Creates an app with a given runner
             /// @param m_runner 
