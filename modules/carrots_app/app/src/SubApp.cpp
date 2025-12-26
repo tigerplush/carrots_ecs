@@ -8,13 +8,15 @@ namespace CarrotsApp
         {
         }
 
-        void SubApp::add_plugin(IPlugin &&plugin)
+        SubApp &SubApp::add_plugin(IPlugin &&plugin)
         {
             plugin.build(*this);
+            return *this;
         }
 
-        void SubApp::add_system(ScheduleLabel label, std::function<void()> system)
+        SubApp &SubApp::add_system(ScheduleLabel label, std::function<void()> system)
         {
+            return *this;
         }
     } // namespace App
 } // namespace CarrotsApp

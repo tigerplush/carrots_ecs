@@ -16,9 +16,10 @@ namespace CarrotsApp
             m_sub_apps.update();
         }
 
-        void App::add_plugin(IPlugin &&plugin)
+        App &App::add_plugin(IPlugin &&plugin)
         {
             plugin.build(*this);
+            return *this;
         }
 
         App &App::add_system(ScheduleLabel label, std::function<void()> system)

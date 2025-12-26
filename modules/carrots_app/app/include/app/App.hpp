@@ -39,13 +39,13 @@ namespace CarrotsApp
             static App create();
         public:
             void update() override;
-            void add_plugin(IPlugin &&plugin) override;
-        public:
+            App &add_plugin(IPlugin &&plugin) override;
             /// Adds a system to a schedule.
             /// @param label 
             /// @param system 
             /// @return 
-            App &add_system(ScheduleLabel label, std::function<void()> system);
+            App &add_system(ScheduleLabel label, std::function<void()> system) override;
+        public:
             /// Runs the app.
             ///
             /// If you don't add any plugins, this will run all schedules once.

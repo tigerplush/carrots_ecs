@@ -1,6 +1,8 @@
 #ifndef CARROTS_APP_APP_I_APP_HPP_
 #define CARROTS_APP_APP_I_APP_HPP_
 
+#include <CarrotsEcs.hpp>
+
 #include "plugin/Plugin.hpp"
 
 namespace CarrotsApp
@@ -8,6 +10,7 @@ namespace CarrotsApp
     namespace App
     {
         using IPlugin = CarrotsApp::Plugin::IPlugin;
+        using ScheduleLabel = CarrotsEcs::ScheduleLabel;
         /// App interface
         ///
         /// Internally, plugins are basically AppBuilders.
@@ -18,7 +21,12 @@ namespace CarrotsApp
         {
         public:
             virtual void update() = 0;
-            virtual void add_plugin(IPlugin &&plugin) = 0;
+            /// Adds a system to a schedule.
+            /// @param label 
+            /// @param system 
+            /// @return 
+            virtual IApp &add_system(ScheduleLabel label, std::function<void()> system) = 0;
+            virtual IApp &add_plugin(IPlugin &&plugin) = 0;
         };
     } // namespace App
 } // namespace CarrotsApp
