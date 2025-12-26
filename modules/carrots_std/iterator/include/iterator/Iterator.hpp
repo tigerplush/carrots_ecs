@@ -102,7 +102,10 @@ namespace CarrotsStd
                 return iterator();
             }
         public:
-
+            /// Consumes the iterator and returns a collection of
+            /// all its values.
+            /// @tparam Collection 
+            /// @return 
             template<typename Collection>
             Collection collect()
             {

@@ -13,6 +13,8 @@ namespace CarrotsEcs
         using Entity = CarrotsEcs::Entity::Entity;
         using TableId = CarrotsEcs::Table::TableId;
         using TableRow = CarrotsEcs::Table::TableRow;
+        /// Specialized iterator over query elements
+        /// @tparam ...Components 
         template <typename... Components>
         class QueryIterator : public CarrotsStd::Iterator::Iterator<std::tuple<Components...>>
         {

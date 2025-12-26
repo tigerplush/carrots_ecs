@@ -27,9 +27,10 @@ An open source, ECS game engine written in c++.
     1. using statements
     2. static methods
     3. constructors
-    4. Interface implementations
-    5. API
-    6. Members (avoid, if possible)
+    4. Operator overloads
+    5. Interface implementations
+    6. API
+    7. Members (avoid in public, if possible)
 
 6. Every class and every public method has to be documented with three slashes `///`
 7. Every header has to have an inclusion guard following the scheme `<PROJECT>_<MODULE>_<SUMODULE...>_FILENAME_HPP_`, such as `CARROTS_ECS_TABLE_TABLE_HPP_`

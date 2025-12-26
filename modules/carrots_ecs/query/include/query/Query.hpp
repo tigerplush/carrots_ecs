@@ -23,10 +23,42 @@ namespace CarrotsEcs
         using Table = CarrotsEcs::Table::Table;
         using TableId = CarrotsEcs::Table::TableId;
         using World = CarrotsEcs::World::World;
+        /// Queries a world for given components while applying the given filters.
+        ///
+        /// # Basic Usage
+        /// ```cpp
+        /// struct Position {};
+        /// World world;
+        /// world.spawn(Position {});
+        /// Query<Components<Entity, Position&>> query(world);
+        /// for(auto [entity, pos]: query.iter())
+        /// {
+        ///     // now you have acces to the entity and it's position
+        /// }
+        /// ```
+        ///
+        /// # Filter example
+        /// NOT IMPLEMENTED YET
+        /// ```cpp
+        /// struct Position {};
+        /// struct Velocity {};
+        /// World world;
+        /// world.spawn(Position {});
+        /// world.spawn(Position {}, Velocity {});
+        /// Query<Components<Entity, Position&>, Filters<With<Velocity>>> query(world);
+        /// for(auto [entity, pos]: query.iter())
+        /// {
+        ///     // now you have acces to all entities and their position but only if they also have a velocity component attached
+        /// }
+        /// ```
+        /// @tparam ...ComponentContent 
+        /// @tparam ...FilterContent 
         template<typename... ComponentContent, typename... FilterContent>
         class Query<Components<ComponentContent...>, Filters<FilterContent...>> : public IQuery
         {
         public:
+            /// Creates a new query from a given world.
+            /// @param t_world 
             Query(
                 World &t_world
             )
@@ -36,11 +68,15 @@ namespace CarrotsEcs
                 create_cache();
             }
         public:
+            /// Returns the number of elements this Query has found
+            /// @return 
             size_t count() const
             {
                 return iter().count();
             }
 
+            /// Returns how many tables the query matches
+            /// @return 
             size_t matching_tables() const
             {
                 return m_table_ids.size();

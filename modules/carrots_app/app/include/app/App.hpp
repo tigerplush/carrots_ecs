@@ -3,8 +3,9 @@
 
 #include <functional>
 
-#include "option/Option.hpp"
-#include "CarrotsEcs.hpp"
+#include <CarrotsEcs.hpp>
+#include <CarrotsStd.hpp>
+
 #include "IApp.hpp"
 #include "SubApps.hpp"
 
@@ -32,22 +33,48 @@ namespace CarrotsApp
         public:
             using RunnerFn = std::function<size_t(App&)>;
         public:
+            /// Creates an empty app.
+            /// @return 
             static App create();
         public:
             void update() override;
         public:
+            /// Adds a system to a schedule.
+            /// @param label 
+            /// @param system 
+            /// @return 
             App &add_system(ScheduleLabel label, std::function<void()> system);
+            /// Runs the app.
+            ///
+            /// If you don't add any plugins, this will run all schedules once.
+            /// If you add the ScheduleRunnerPlugin, this will run indefinitely
+            /// until either canceled by a user, a crash appears or some system
+            /// sends the AppExit Message.
+            /// @return 
             size_t run();
+            /// Returns `Some(exit code)`, when the App should exit,
+            /// None otherwise.
+            /// @return 
             Option<size_t> should_exit();
         private:
+            /// Creates an empty app with a default runner
+            /// that will run all schedules exactly once and
+            /// then return
+            /// @return 
             static App empty();
         private:
+            /// Creates an app with a given runner
+            /// @param m_runner 
             explicit App(RunnerFn m_runner);
         private:
             SubApps m_sub_apps;
             RunnerFn m_runner;
         };
 
+        /// Helper to run all schedules exactly once
+        /// and then return.
+        /// @param app 
+        /// @return 
         size_t run_once(App &app);
     } // namespace App
 } // namespace CarrotsApp

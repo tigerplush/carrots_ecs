@@ -15,6 +15,10 @@ namespace CarrotsStd
 
         inline constexpr NoneType None{};
 
+        /// Represents an optional value.
+        ///
+        /// Optional values either are Some(value) or None.
+        /// @tparam T 
         template <typename T>
         class Option
         {
@@ -85,11 +89,38 @@ namespace CarrotsStd
                 return value_when_none;
             }
 
+            /// Returns true if the option is a `Some` value.
+            ///
+            /// # Examples
+            /// ```cpp
+            /// Option<int> x = Some(5);
+            /// assert(x.is_some() == true);
+            /// ```
+            ///
+            /// ```cpp
+            /// Option<int> x = None;
+            /// assert(x.is_some() == false);
+            /// ```
+            /// @return 
             bool is_some() const
             {
                 return m_has_value;
             }
 
+
+            /// Returns true if the option is a `None` value.
+            ///
+            /// # Examples
+            /// ```cpp
+            /// Option<int> x = Some(5);
+            /// assert(x.is_none() == false);
+            /// ```
+            ///
+            /// ```cpp
+            /// Option<int> x = None;
+            /// assert(x.is_none() == true);
+            /// ```
+            /// @return 
             bool is_none() const
             {
                 return !is_some();

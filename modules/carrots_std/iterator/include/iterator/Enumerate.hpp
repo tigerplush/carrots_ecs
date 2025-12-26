@@ -9,6 +9,10 @@ namespace CarrotsStd
     {
         template<typename T>
         using Indexed = std::tuple<size_t, T>;
+
+        /// An iterator that yields the current count and the element during iteration.
+        /// This iterator is created by the `.enumerate()` method on `Iterator`
+        /// @tparam OutputType 
         template<typename OutputType>
         class Enumerate : public Iterator<Indexed<OutputType>>
         {

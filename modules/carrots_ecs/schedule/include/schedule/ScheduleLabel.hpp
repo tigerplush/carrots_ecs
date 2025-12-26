@@ -5,6 +5,11 @@ namespace CarrotsEcs
 {
     namespace Schedule
     {
+        /// A label for Schedules.
+        ///
+        /// There are a few schedules that carrots will
+        /// provide, but a user can create new schedules
+        /// for their own purpose.
         class ScheduleLabel
         {
         public:

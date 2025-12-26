@@ -7,6 +7,9 @@ namespace CarrotsStd
 {
     namespace Iterator
     {
+        /// An iterator that filters the elements of `.iter()` with a `predicate`.
+        /// This iterator is created by the `.filter()` method on `Iterator`.
+        /// @tparam OutputType 
         template<typename OutputType>
         class Filter : public Iterator<OutputType>
         {
