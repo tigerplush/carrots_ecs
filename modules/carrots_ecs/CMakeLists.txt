@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.23)
+
 add_subdirectory(archetype)
 add_subdirectory(component)
 add_subdirectory(entity)
@@ -6,6 +8,7 @@ add_subdirectory(schedule)
 add_subdirectory(table)
 add_subdirectory(world)
 
+project(carrots_ecs VERSION 0.0.1 LANGUAGES CXX)
 
 add_library(carrots_ecs INTERFACE)
 

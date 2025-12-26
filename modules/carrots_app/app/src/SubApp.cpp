@@ -18,5 +18,10 @@ namespace CarrotsApp
         {
             return *this;
         }
+
+        World &SubApp::get_world()
+        {
+            return m_world;
+        }
     } // namespace App
 } // namespace CarrotsApp

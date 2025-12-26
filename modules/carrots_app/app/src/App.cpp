@@ -37,10 +37,16 @@ namespace CarrotsApp
             return None;
         }
 
+        World &App::get_world()
+        {
+            return m_sub_apps.get_main_app().get_world();
+        }
+
         App App::empty()
         {
             return App(run_once);
         }
+
         App App::standard()
         {
             App app = App::empty();

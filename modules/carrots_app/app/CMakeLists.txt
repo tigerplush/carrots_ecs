@@ -4,7 +4,6 @@ add_library(app STATIC
     src/SubApp.cpp
 )
 
-
 target_compile_definitions(app PRIVATE TRACING_LOG_MODULE_NAME="carrots_app::app")
 
 target_sources(app

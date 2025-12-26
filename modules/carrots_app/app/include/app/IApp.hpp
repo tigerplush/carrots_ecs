@@ -9,8 +9,10 @@ namespace CarrotsApp
 {
     namespace App
     {
+        using ComponentId = CarrotsEcs::ComponentId;
         using IPlugin = CarrotsApp::Plugin::IPlugin;
         using ScheduleLabel = CarrotsEcs::ScheduleLabel;
+        using World = CarrotsEcs::World::World;
         /// App interface
         ///
         /// Internally, plugins are basically AppBuilders.
@@ -27,6 +29,21 @@ namespace CarrotsApp
             /// @return 
             virtual IApp &add_system(ScheduleLabel label, std::function<void()> system) = 0;
             virtual IApp &add_plugin(IPlugin &&plugin) = 0;
+            /// Inserts a component before the first schedule is run
+            ///
+            /// This way a user can have Data ready at Startup.
+            ///
+            /// @tparam Component 
+            /// @param component 
+            /// @return 
+            template<typename Component>
+            IApp &insert_resource(Component &&component)
+            {
+                get_world().spawn(component);
+                return *this;
+            }
+        protected:
+            virtual World &get_world() = 0;
         };
     } // namespace App
 } // namespace CarrotsApp

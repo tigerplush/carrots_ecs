@@ -10,6 +10,7 @@ namespace CarrotsEcs
             size_t t_id
         )
         : m_id(t_id)
+        , m_generation(0)
         {
 
         }

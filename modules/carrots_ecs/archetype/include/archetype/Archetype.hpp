@@ -1,6 +1,7 @@
 #ifndef CARROTS_ECS_ARCHETYPE_ARCHETYPE_HPP_
 #define CARROTS_ECS_ARCHETYPE_ARCHETYPE_HPP_
 
+#include <ostream>
 #include <set>
 #include <typeindex>
 
@@ -45,6 +46,22 @@ namespace CarrotsEcs
 
         private:
             explicit Archetype(std::set<std::type_index> t_signature);
+        private:
+            friend std::ostream &operator<<(std::ostream &os, const Archetype &other)
+            {
+                os << "Archetype { signatures: [";
+                for(auto it = other.m_signature.begin(); it != other.m_signature.end(); ++it)
+                {
+                    if(it != other.m_signature.begin())
+                    {
+                        os << ", ";
+                    }
+                    os << it->name();
+                }
+                os << "] }";
+                return os;
+            }
+        private:
             /// Calculates a hash over the signatures by using the stolen formula from boost library `combine_hash`
             /// @return 
             size_t calculate_hash_code() const;

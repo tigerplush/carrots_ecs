@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include <Tracing.hpp>
+
 #include "archetype/Archetype.hpp"
 #include "archetype/ArchetypeHasher.hpp"
 #include "entity/Entity.hpp"
@@ -41,8 +43,10 @@ namespace CarrotsEcs
             Entity spawn(Components... components)
             {
                 Archetype archetype = Archetype::from<Components...>();
+                TRACE << "Spawning entity of " << archetype;
                 if (m_archetype_to_table_id.find(archetype) == m_archetype_to_table_id.end())
                 {
+                    TRACE << archetype << " was previously unknown, creating table...";
                     // No table, register one
                     register_table<Components...>();
                 }
@@ -52,6 +56,7 @@ namespace CarrotsEcs
                 Table &table = m_tables[table_id.id()];
                 TableRow table_row = table.insert(entity, components...);
                 m_entities.emplace_back(EntityMeta(table_id, table_row));
+                TRACE << "Placed " << entity << " in " << table_id << " @ " << table_row;
                 return entity;
             }
 

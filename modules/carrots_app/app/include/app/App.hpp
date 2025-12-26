@@ -31,20 +31,23 @@ namespace CarrotsApp
         class App : public IApp
         {
         public:
-            using RunnerFn = std::function<size_t(App&)>;
+            using RunnerFn = std::function<size_t(App &)>;
+
         public:
             /// Creates an new app with some default structure to enable core engine features.
             /// This is the preferred constructor for most cases.
-            /// @return 
+            /// @return
             static App create();
+
         public:
             void update() override;
             App &add_plugin(IPlugin &&plugin) override;
             /// Adds a system to a schedule.
-            /// @param label 
-            /// @param system 
-            /// @return 
+            /// @param label
+            /// @param system
+            /// @return
             App &add_system(ScheduleLabel label, std::function<void()> system) override;
+
         public:
             /// Runs the app.
             ///
@@ -52,26 +55,31 @@ namespace CarrotsApp
             /// If you add the ScheduleRunnerPlugin, this will run indefinitely
             /// until either canceled by a user, a crash appears or some system
             /// sends the AppExit Message.
-            /// @return 
+            /// @return
             size_t run();
             /// Returns `Some(exit code)`, when the App should exit,
             /// None otherwise.
-            /// @return 
+            /// @return
             Option<size_t> should_exit();
+        protected:
+            World &get_world() override;
+
         private:
             /// Creates an empty app with a default runner
             /// that will run all schedules exactly once and
             /// then return
-            /// @return 
+            /// @return
             static App empty();
             /// Creates an new app with some default structure to enable core engine features.
             /// This is the preferred constructor for most cases.
-            /// @return 
+            /// @return
             static App standard();
+
         private:
             /// Creates an app with a given runner
-            /// @param m_runner 
+            /// @param m_runner
             explicit App(RunnerFn m_runner);
+
         private:
             SubApps m_sub_apps;
             RunnerFn m_runner;
@@ -79,8 +87,8 @@ namespace CarrotsApp
 
         /// Helper to run all schedules exactly once
         /// and then return.
-        /// @param app 
-        /// @return 
+        /// @param app
+        /// @return
         size_t run_once(App &app);
     } // namespace App
 } // namespace CarrotsApp

@@ -1,6 +1,8 @@
 #ifndef CARROTS_ECS_ENTITY_ENTITY_HPP_
 #define CARROTS_ECS_ENTITY_ENTITY_HPP_
 
+#include <ostream>
+
 namespace CarrotsEcs
 {
     namespace Entity
@@ -20,7 +22,14 @@ namespace CarrotsEcs
                 return m_id != other.m_id;
             }
         private:
+            friend std::ostream &operator<<(std::ostream &os, const Entity &other)
+            {
+                os << "Entity (" << other.m_id << "v" << other.m_generation << ")";
+                return os;
+            }
+        private:
             size_t m_id;
+            size_t m_generation;
         };
     } // namespace Entity
 } // namespace CarrotsEcs

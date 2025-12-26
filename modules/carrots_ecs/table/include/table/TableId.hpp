@@ -1,6 +1,8 @@
 #ifndef CARROTS_ECS_TABLE_TABLE_ID_HPP_
 #define CARROTS_ECS_TABLE_TABLE_ID_HPP_
 
+#include <ostream>
+
 namespace CarrotsEcs
 {
     namespace Table
@@ -36,6 +38,12 @@ namespace CarrotsEcs
             bool operator>=(const TableId& other) const
             {
                 return m_id >= other.m_id;
+            }
+        private:
+            friend std::ostream &operator<<(std::ostream &os, const TableId &other)
+            {
+                os << "TableId (" << other.m_id << ")";
+                return os;
             }
         private:
             size_t m_id;
