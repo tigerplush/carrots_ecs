@@ -8,7 +8,7 @@ namespace CarrotsApp
         {
         }
 
-        void SubApp::add_system(std::function<void()> system)
+        void SubApp::add_system(ScheduleLabel label, std::function<void()> system)
         {
         }
     } // namespace App

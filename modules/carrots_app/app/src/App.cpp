@@ -16,7 +16,7 @@ namespace CarrotsApp
 
         App &App::add_system(ScheduleLabel label, std::function<void()> system)
         {
-            m_sub_apps.get_main_app().add_system(system);
+            m_sub_apps.get_main_app().add_system(label, system);
             return *this;
         }
         size_t App::run()

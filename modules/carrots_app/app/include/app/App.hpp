@@ -13,7 +13,20 @@ namespace CarrotsApp
     namespace App
     {
         using namespace CarrotsStd::Option;
-        using ScheduleLabel = CarrotsEcs::Schedule::ScheduleLabel;
+        using ScheduleLabel = CarrotsEcs::ScheduleLabel;
+        /// An App brings together plugins and systems
+        ///
+        /// Create a new App with `App::create()`.
+        ///
+        /// Add systems to schedules with `.add_system(schedule, system)`.
+        ///
+        /// Add plugins to the app with `.add_plugin(plugin)`.
+        ///
+        /// At last, call `.run()` to run the app.
+        ///
+        /// # Remarks
+        /// If you don't add any plugins, the App will be empty and run
+        /// every schedule once before returning.
         class App : public IApp
         {
         public:

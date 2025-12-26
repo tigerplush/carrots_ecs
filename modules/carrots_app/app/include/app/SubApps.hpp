@@ -9,6 +9,11 @@ namespace CarrotsApp
 {
     namespace App
     {
+        /// Collection of SubApps
+        ///
+        /// Each SubApps Collection starts with one "Main" SubApp,
+        /// that a user can immediately add systems to without the need
+        /// to specifically create a plugin.
         class SubApps
         {
         public:

@@ -6,6 +6,11 @@ namespace CarrotsApp
 {
     namespace App
     {
+        /// App interface
+        /// Internally, plugins are basically AppBuilders.
+        /// So if you add a plugin, the app will call `.build` on that plugin
+        /// which will return a SubApp, that is added to the main apps list
+        /// via this type erased interface.
         class IApp
         {
         public:
