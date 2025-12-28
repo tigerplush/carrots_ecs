@@ -1,7 +1,7 @@
 #ifndef CARROTS_ECS_QUERY_QUERY_ITERATOR_HPP_
 #define CARROTS_ECS_QUERY_QUERY_ITERATOR_HPP_
 
-#include "CarrotsStd.hpp"
+#include <carrots_std.hpp>
 
 #include "IQuery.hpp"
 
@@ -16,7 +16,7 @@ namespace CarrotsEcs
         /// Specialized iterator over query elements
         /// @tparam ...Components 
         template <typename... Components>
-        class QueryIterator : public CarrotsStd::Iterator::Iterator<std::tuple<Components...>>
+        class QueryIterator : public carrots_std::Iterator::Iterator<std::tuple<Components...>>
         {
         public:
             QueryIterator(std::unique_ptr<IQuery> t_query)

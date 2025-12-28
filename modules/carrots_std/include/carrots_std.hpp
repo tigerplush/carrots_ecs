@@ -8,10 +8,13 @@
 #include "iterator/StringIterator.hpp"
 #include "option/Option.hpp"
 
-namespace CarrotsStd
+#include "result/result.hpp"
+
+namespace carrots_std
 {
     using namespace CarrotsStd::Iterator;
     using namespace CarrotsStd::Option;
+    using namespace carrots_std::result;
 } // namespace CarrotsStd
 
 

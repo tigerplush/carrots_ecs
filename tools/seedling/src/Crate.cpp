@@ -1,12 +1,12 @@
 #include "Crate.hpp"
 
-#include "CarrotsStd.hpp"
+#include <carrots_std.hpp>
 
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
-using namespace CarrotsStd::Iterator;
+using namespace carrots_std;
 
 namespace crate
 {
