@@ -87,8 +87,6 @@ TEST(IteratorTest, CollectIterator)
     EXPECT_EQ(lhs, rhs);
 }
 
-
-
 TEST(IteratorTest, EnumerateIterator)
 {
     Counter counter(5, 10);
@@ -99,4 +97,21 @@ TEST(IteratorTest, EnumerateIterator)
     EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{3, 8}));
     EXPECT_EQ(enumerate.next(), Some(std::tuple<size_t, size_t>{4, 9}));
     EXPECT_EQ(enumerate.next(), None);
+}
+
+
+TEST(IteratorTest, AllTrue)
+{
+    Counter counter(5, 10);
+    EXPECT_TRUE(counter.all([](const size_t &element) {
+        return element > 0;
+    }));
+}
+
+TEST(IteratorTest, AllFalse)
+{
+    Counter counter(5, 10);
+    EXPECT_FALSE(counter.all([](const size_t &element) {
+        return element > 6;
+    }));
 }

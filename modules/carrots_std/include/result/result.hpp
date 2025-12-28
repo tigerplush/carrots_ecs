@@ -8,7 +8,8 @@ namespace carrots_std
 {
     namespace result
     {
-
+        struct UnitType
+        {};
         template<typename T, typename E>
         class Result;
 
@@ -16,6 +17,7 @@ namespace carrots_std
         struct Ok
         {
         public:
+            explicit Ok(const T &t_value) : m_value(t_value) {}
             explicit Ok(T &&t_value) : m_value(std::move(t_value)) {}
         private:
             T m_value;
@@ -27,6 +29,7 @@ namespace carrots_std
         struct Err
         {
         public:
+            explicit Err(const E &t_error) : m_error(t_error) {}
             explicit Err(E &&t_error) : m_error(std::move(t_error)) {}
         private:
             E m_error;
@@ -52,6 +55,11 @@ namespace carrots_std
             bool is_err() const
             {
                 return !is_ok();
+            }
+            T &unwrap()
+            {
+                assert(is_ok());
+                return std::get<OkTag>(m_result).value;
             }
         private:
             struct OkTag

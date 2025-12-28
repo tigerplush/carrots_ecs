@@ -3,12 +3,14 @@
 
 #include <functional>
 
+#include "result/result.hpp"
 #include "option/option.hpp"
 
 namespace carrots_std
 {
     namespace iterator
     {
+        using namespace carrots_std::result;
         using namespace carrots_std::option;
 
         // Forward declaration of Enumerate
@@ -108,7 +110,18 @@ namespace carrots_std
             /// @return 
             bool all(std::function<bool(const OutputType&)> f)
             {
-                return false;
+                std::function<Result<UnitType, UnitType>(UnitType, const OutputType &)> check = [f](UnitType _, const OutputType &element) -> Result<UnitType, UnitType>
+                {
+                    if(f(element))
+                    {
+                        return Ok<UnitType>({});
+                    }
+                    else
+                    {
+                        return Err<UnitType>({});
+                    }
+                };
+                return try_fold({}, check).is_ok();
             }
             /// Consumes the iterator and returns a collection of
             /// all its values.
@@ -166,9 +179,22 @@ namespace carrots_std
 
             /// Tries to fold every element into an accumulator by applying an operation and returning
             /// a final result. This will short circuit (e.g. break prematurely), if the operation could not be applied.
-            void try_fold()
+            template<typename B, typename E>
+            auto try_fold(B init, std::function<Result<B, E>(B, const OutputType&)> f) -> Result<B, E>
             {
-
+                B accumulator = init;
+                Option<OutputType> x = next();
+                while(None != x)
+                {
+                    Result<B, E> result = f(accumulator, x.unwrap());
+                    if(result.is_err())
+                    {
+                        return result;
+                    }
+                    accumulator = result.unwrap();
+                    x = next();
+                }
+                return Ok(accumulator);
             }
 
             /// Finds the first element in the iterator that matches the predicate
