@@ -27,9 +27,10 @@ namespace carrots_app
             m_sub_apps.get_main_app().add_system(label, system);
             return *this;
         }
-        size_t App::run()
+
+        int App::run()
         {
-            return m_runner(*this);
+            return static_cast<int>(m_runner(*this));
         }
 
         Option<size_t> App::should_exit()

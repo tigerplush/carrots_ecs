@@ -56,7 +56,7 @@ namespace carrots_app
             /// until either canceled by a user, a crash appears or some system
             /// sends the AppExit Message.
             /// @return
-            size_t run();
+            int run();
             /// Returns `Some(exit code)`, when the App should exit,
             /// None otherwise.
             /// @return
