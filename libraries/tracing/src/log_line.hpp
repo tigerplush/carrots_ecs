@@ -3,10 +3,10 @@
 
 #include <sstream>
 
-#include "Logger.hpp"
-#include "LogLevel.hpp"
+#include "log_level.hpp"
+#include "logger.hpp"
 
-namespace Tracing
+namespace tracing
 {
     class LogLine
     {

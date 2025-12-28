@@ -12,12 +12,11 @@
 
 #include <iostream>
 
-#include "ILogSink.hpp"
-#include "ILogSubscriber.hpp"
-#include "LogLevel.hpp"
-#include "StdCoutSink.hpp"
+#include "log_level.hpp"
+#include "logging_traits.hpp"
+#include "std_cout_sink.hpp"
 
-namespace Tracing
+namespace tracing
 {
     class DefaultLogSubscriber : public ILogSubscriber
     {
@@ -49,7 +48,7 @@ namespace Tracing
                 std::string log_level = remainder.substr(delimiter_position + 1, remainder.length());
                 LogLevel level = LogLevel::parse(log_level);
                 m_filter.insert_or_assign(module_name, level);
-                current_index += length;
+                current_index += length + 1;
             }
         }
 

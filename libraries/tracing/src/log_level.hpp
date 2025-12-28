@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <ostream>
 
-namespace Tracing
+namespace tracing
 {
     enum class LogLevelEnum
     {
@@ -37,9 +37,9 @@ namespace Tracing
             {
                 return LogLevel(LogLevelEnum::Warning);
             }
-            if("INFO" == string)
+            if("ERROR" == string)
             {
-                return LogLevel(LogLevelEnum::Info);
+                return LogLevel(LogLevelEnum::Error);
             }
             assert(true);
         }

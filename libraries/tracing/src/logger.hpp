@@ -5,11 +5,10 @@
 #include <string>
 #include <vector>
 
-#include "DefaultLogSubscriber.hpp"
-#include "ILogSubscriber.hpp"
-#include "LogLevel.hpp"
+#include "default_log_subscriber.hpp"
+#include "logging_traits.hpp"
 
-namespace Tracing
+namespace tracing
 {
     class Logger
     {

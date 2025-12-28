@@ -1,24 +1,26 @@
 #ifndef TRACING_TRACING_HPP_
 #define TRACING_TRACING_HPP_
 
-#include "LogLevel.hpp"
-#include "LogLine.hpp"
+#include "log_level.hpp"
+#include "log_line.hpp"
+namespace {
+    constexpr const char* TRACING_CURRENT_MODULE = "";
+}
 
-#ifdef TRACING_LOG_MODULE_NAME
-constexpr const char* LOG_MODULE_NAME = TRACING_LOG_MODULE_NAME;
-#else
-constexpr const char* LOG_MODULE_NAME = "";
-#endif
+#define MODULE(name) \
+    namespace { constexpr const char* TRACING_CURRENT_MODULE = name; }
 
-#define LOG(severity) Tracing::LogLine(LOG_MODULE_NAME, severity)
+#define LOG(severity) tracing::LogLine(TRACING_CURRENT_MODULE, severity)
+#define LOG(severity) tracing::LogLine(TRACING_CURRENT_MODULE, severity)
 
-#define TRACE LOG(Tracing::LogLevelEnum::Trace)
-#define DEBUG LOG(Tracing::LogLevelEnum::Debug)
-#define INFO LOG(Tracing::LogLevelEnum::Info)
-#define WARNING LOG(Tracing::LogLevelEnum::Warning)
-#define ERROR LOG(Tracing::LogLevelEnum::Error)
 
-namespace Tracing
+#define TRACE LOG(tracing::LogLevelEnum::Trace)
+#define DEBUG LOG(tracing::LogLevelEnum::Debug)
+#define INFO LOG(tracing::LogLevelEnum::Info)
+#define WARNING LOG(tracing::LogLevelEnum::Warning)
+#define ERROR LOG(tracing::LogLevelEnum::Error)
+
+namespace tracing
 {
     
 } // namespace Tracing

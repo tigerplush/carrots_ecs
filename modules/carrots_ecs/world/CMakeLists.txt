@@ -3,8 +3,6 @@ add_library(world STATIC
     src/World.cpp
 )
 
-target_compile_definitions(world PRIVATE TRACING_LOG_MODULE_NAME="carrots_ecs::world")
-
 target_sources(world
     PUBLIC
         FILE_SET HEADERS

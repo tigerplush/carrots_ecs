@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include <Tracing.hpp>
+#include <tracing.hpp>
 
 #include "archetype/Archetype.hpp"
 #include "archetype/ArchetypeHasher.hpp"
@@ -18,6 +18,7 @@ namespace CarrotsEcs
 {
     namespace World
     {
+        MODULE("carrots_ecs::world")
         using Archetype = CarrotsEcs::Archetype::Archetype;
         using ArchetypeHasher = CarrotsEcs::Archetype::ArchetypeHasher;
         using Entity = CarrotsEcs::Entity::Entity;

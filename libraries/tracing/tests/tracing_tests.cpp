@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "Tracing.hpp"
+#include <tracing.hpp>
 
 TEST(TracingTest, Tracing)
 {

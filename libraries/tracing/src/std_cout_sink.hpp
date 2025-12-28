@@ -4,9 +4,9 @@
 #include <iostream>
 #include <string>
 
-#include "ILogSink.hpp"
+#include "logging_traits.hpp"
 
-namespace Tracing
+namespace tracing
 {
     class StdCoutSink : public ILogSink
     {

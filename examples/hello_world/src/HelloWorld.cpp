@@ -1,6 +1,6 @@
 #include "Carrots.hpp"
 
-#include "DefaultLogSubscriber.hpp"
+#include <tracing.hpp>
 
 #include <iostream>
 
@@ -13,6 +13,6 @@ void hello_world()
 
 int main()
 {
-    Tracing::DefaultLogSubscriber::get_instance().set_filter("carrots_app::app=TRACE");
+    tracing::DefaultLogSubscriber::get_instance().set_filter("carrots_app::app=TRACE,carrots_ecs::world=TRACE");
     return App::create().add_system(Startup, hello_world).run();
 }

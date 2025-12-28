@@ -10,21 +10,21 @@ target_sources(tracing
         FILE_SET HEADERS
         BASE_DIRS
             include
+            src
         FILES
-            include/DefaultLogSubscriber.hpp
-            include/ILogSink.hpp
-            include/ILogSubscriber.hpp
-            include/Logger.hpp
-            include/LogLevel.hpp
-            include/LogLine.hpp
-            include/StdCoutSink.hpp
-            include/Tracing.hpp
+            include/tracing.hpp
+            src/default_log_subscriber.hpp
+            src/log_level.hpp
+            src/log_line.hpp
+            src/logger.hpp
+            src/logging_traits.hpp
+            src/std_cout_sink.hpp
 )
 
 
 # Tests
 add_executable(tracing_tests
-    tests/TracingTests.cpp
+    tests/tracing_tests.cpp
 )
 
 target_link_libraries(tracing_tests
