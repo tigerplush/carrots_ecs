@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "option/Option.hpp"
+#include <carrots_std.hpp>
 
-using namespace CarrotsStd::Option;
+using namespace carrots_std;
 
 TEST(OptionTest, OptionNone)
 {

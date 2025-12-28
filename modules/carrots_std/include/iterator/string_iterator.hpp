@@ -6,11 +6,11 @@
 #include <functional>
 #include <string>
 
-#include "Iterator.hpp"
+#include "iterator.hpp"
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Iterator
+    namespace iterator
     {
         class Split;
 
@@ -47,20 +47,20 @@ namespace CarrotsStd
             }
             Split split(std::string delimiter);
         public:
-            Option::Option<OutputType> next() override
+            Option<OutputType> next() override
             {
                 if(m_exhausted)
                 {
-                    return Option::None;
+                    return None;
                 }
                 m_exhausted = true;
-                return Option::Some(std::string(m_string));
+                return Some(std::string(m_string));
             }
         private:
             const std::string &m_string;
             bool m_exhausted;
         };
-    } // namespace Iterator
-} // namespace CarrotsStd
+    } // namespace iterator
+} // namespace carrots_std
 
 #endif

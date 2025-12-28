@@ -1,11 +1,11 @@
 #ifndef CARROTS_STD_ITERATOR_ENUMERATE_HPP_
 #define CARROTS_STD_ITERATOR_ENUMERATE_HPP_
 
-#include "Iterator.hpp"
+#include "iterator.hpp"
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Iterator
+    namespace iterator
     {
         template<typename T>
         using Indexed = std::tuple<size_t, T>;
@@ -26,24 +26,24 @@ namespace CarrotsStd
             , m_index(0)
             {}
         public:
-            Option::Option<Item> next() override
+            Option<Item> next() override
             {
-                Option::Option<OutputType> next = m_iter->next();
+                Option<OutputType> next = m_iter->next();
                 if(next.is_none())
                 {
-                    return Option::None;
+                    return None;
                 }
                 size_t index = m_index;
                 m_index += 1;
-                return Option::Some(Item{index, next.unwrap()});
+                return Some(Item{index, next.unwrap()});
             }
 
         private:
             Iterator<OutputType> *m_iter;
             size_t m_index;
         };
-    } // namespace Iterator
-} // namespace CarrotsStd
+    } // namespace iterator
+} // namespace carrots_std
 
 
 #endif

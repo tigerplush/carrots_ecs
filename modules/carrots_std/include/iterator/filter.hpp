@@ -1,11 +1,11 @@
 #ifndef CARROTS_STD_ITERATOR_FILTER_HPP_
 #define CARROTS_STD_ITERATOR_FILTER_HPP_
 
-#include "Iterator.hpp"
+#include "iterator.hpp"
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Iterator
+    namespace iterator
     {
         /// An iterator that filters the elements of `.iter()` with a `predicate`.
         /// This iterator is created by the `.filter()` method on `Iterator`.
@@ -31,8 +31,8 @@ namespace CarrotsStd
             Iterator<OutputType> *m_iter;
             std::function<bool(const OutputType&)> m_predicate;
         };
-    } // namespace Iterator
-} // namespace CarrotsStd
+    } // namespace iterator
+} // namespace carrots_std
 
 
 #endif

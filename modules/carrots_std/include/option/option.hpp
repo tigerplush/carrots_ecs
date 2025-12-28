@@ -3,9 +3,9 @@
 
 #include <type_traits>
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Option
+    namespace option
     {
         struct NoneType
         {
@@ -169,7 +169,7 @@ namespace CarrotsStd
         {
             return Option<std::decay_t<T>>(std::forward<T>(value));
         }
-    } // namespace Option
-} // namespace CarrotsStd
+    } // namespace option
+} // namespace carrots_std
 
 #endif

@@ -1,19 +1,19 @@
 #ifndef CARROTS_STD_CARROTS_STD_HPP_
 #define CARROTS_STD_CARROTS_STD_HPP_
 
-#include "iterator/Enumerate.hpp"
-#include "iterator/Filter.hpp"
-#include "iterator/Iterator.hpp"
-#include "iterator/Split.hpp"
-#include "iterator/StringIterator.hpp"
+#include "iterator/enumerate.hpp"
+#include "iterator/filter.hpp"
+#include "iterator/iterator.hpp"
+#include "iterator/split.hpp"
+#include "iterator/string_iterator.hpp"
 #include "option/Option.hpp"
 
 #include "result/result.hpp"
 
 namespace carrots_std
 {
-    using namespace CarrotsStd::Iterator;
-    using namespace CarrotsStd::Option;
+    using namespace carrots_std::iterator;
+    using namespace carrots_std::option;
     using namespace carrots_std::result;
 } // namespace CarrotsStd
 

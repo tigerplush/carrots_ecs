@@ -1,14 +1,14 @@
-#include "iterator/StringIterator.hpp"
+#include "iterator/string_iterator.hpp"
 
-#include "iterator/Split.hpp"
+#include "iterator/split.hpp"
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Iterator
+    namespace iterator
     {
         Split StringIterator::split(std::string delimiter)
         {
             return Split(m_string, delimiter);
         }
     } // namespace Iterator
-} // namespace CarrotsStd
+} // namespace carrots_std

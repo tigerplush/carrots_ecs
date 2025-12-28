@@ -3,12 +3,14 @@
 
 #include <functional>
 
-#include "option/Option.hpp"
+#include "option/option.hpp"
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Iterator
+    namespace iterator
     {
+        using namespace carrots_std::option;
+
         // Forward declaration of Enumerate
         template<typename OutputType>
         class Enumerate;
@@ -41,7 +43,7 @@ namespace CarrotsStd
                 iterator()
                 : m_iter(nullptr)
                 , m_end(true)
-                , m_value(Option::None)
+                , m_value(None)
                 {
                 }
 
@@ -52,7 +54,7 @@ namespace CarrotsStd
                 )
                 : m_iter(t_iter)
                 , m_end(false)
-                , m_value(Option::None)
+                , m_value(None)
                 {
                     advance();
                 }
@@ -78,7 +80,7 @@ namespace CarrotsStd
             private:
                 Iterator<OutputType> *m_iter;
                 bool m_end;
-                Option::Option<OutputType> m_value;
+                Option<OutputType> m_value;
             private:
                 void advance()
                 {
@@ -89,7 +91,7 @@ namespace CarrotsStd
                     }
 
                     m_value = m_iter->next();
-                    m_end = (Option::None == m_value);
+                    m_end = (None == m_value);
                 }
             };
         public:
@@ -102,6 +104,12 @@ namespace CarrotsStd
                 return iterator();
             }
         public:
+            /// Checks if all values of an iterator fulfill a given predicate
+            /// @return 
+            bool all(std::function<bool(const OutputType&)> f)
+            {
+                return false;
+            }
             /// Consumes the iterator and returns a collection of
             /// all its values.
             /// @tparam Collection 
@@ -110,8 +118,8 @@ namespace CarrotsStd
             Collection collect()
             {
                 Collection collection;
-                Option::Option<OutputType> x = next();
-                while(Option::None != x)
+                Option<OutputType> x = next();
+                while(None != x)
                 {
                     if(x.is_some())
                     {
@@ -147,8 +155,8 @@ namespace CarrotsStd
             B fold(B init, std::function<B(B, const OutputType&)> f)
             {
                 B accumulator = init;
-                Option::Option<OutputType> x = next();
-                while(Option::None != x)
+                Option<OutputType> x = next();
+                while(None != x)
                 {
                     accumulator = f(accumulator, x.unwrap());
                     x = next();
@@ -156,13 +164,20 @@ namespace CarrotsStd
                 return accumulator;
             }
 
+            /// Tries to fold every element into an accumulator by applying an operation and returning
+            /// a final result. This will short circuit (e.g. break prematurely), if the operation could not be applied.
+            void try_fold()
+            {
+
+            }
+
             /// Finds the first element in the iterator that matches the predicate
             /// @param f 
             /// @return Option of element, None if no element could be found
-            Option::Option<OutputType> find(std::function<bool(const OutputType&)> f)
+            Option<OutputType> find(std::function<bool(const OutputType&)> f)
             {
-                Option::Option<OutputType> x = next();
-                while(Option::None != x)
+                Option<OutputType> x = next();
+                while(None != x)
                 {
                     if(f(x.unwrap()))
                     {
@@ -170,7 +185,7 @@ namespace CarrotsStd
                     }
                     x = next();
                 }
-                return Option::None;
+                return None;
             }
 
             /// Filters an iterator after a predicate and returns an iterator to the filtered values.
@@ -185,7 +200,7 @@ namespace CarrotsStd
         public:
             virtual Option::Option<OutputType> next() = 0;
         };
-    } // namespace Iterator
-} // namespace CarrotsStd
+    } // namespace iterator
+} // namespace carrots_std
 
 #endif

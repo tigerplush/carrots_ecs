@@ -3,11 +3,11 @@
 
 #include <string>
 
-#include "Iterator.hpp"
+#include "iterator.hpp"
 
-namespace CarrotsStd
+namespace carrots_std
 {
-    namespace Iterator
+    namespace iterator
     {
         using OutputType = std::string;
         class Split : public Iterator<OutputType>
@@ -23,11 +23,11 @@ namespace CarrotsStd
 
             }
         public:
-            Option::Option<OutputType> next() override
+            Option<OutputType> next() override
             {
                 if(m_offset >= m_string.length())
                 {
-                    return Option::None;
+                    return None;
                 }
                 size_t pos = m_string.find(m_delimiter, m_offset);
                 if(pos == std::string::npos)
@@ -37,14 +37,14 @@ namespace CarrotsStd
                 }
                 std::string substring = m_string.substr(m_offset, pos - m_offset);
                 m_offset = pos + m_delimiter.length();
-                return Option::Some(std::move(substring));
+                return Some(std::move(substring));
             }
         private:
             size_t m_offset;
             const std::string &m_string;
             std::string m_delimiter;
         };
-    } // namespace Iterator
-} // namespace CarrotsStd
+    } // namespace iterator
+} // namespace carrots_std
 
 #endif

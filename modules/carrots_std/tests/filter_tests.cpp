@@ -1,9 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "iterator/Filter.hpp"
+#include <carrots_std.hpp>
 
-using namespace CarrotsStd::Iterator;
-using namespace CarrotsStd::Option;
+using namespace carrots_std;
 
 class Counter : public Iterator<size_t>
 {

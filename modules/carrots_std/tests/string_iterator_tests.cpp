@@ -1,10 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "iterator/Split.hpp"
-#include "iterator/StringIterator.hpp"
+#include <carrots_std.hpp>
 
-using namespace CarrotsStd::Iterator;
-using namespace CarrotsStd::Option;
+using namespace carrots_std;
 
 TEST(StringIteratorTests, CreateIterator)
 {

@@ -9,6 +9,8 @@ namespace CarrotsEcs
 {
     namespace Query
     {
+        using namespace carrots_std;
+
         using ComponentId = CarrotsEcs::Component::ComponentId;
         using Entity = CarrotsEcs::Entity::Entity;
         using TableId = CarrotsEcs::Table::TableId;
@@ -25,7 +27,7 @@ namespace CarrotsEcs
             }
 
         public:
-            CarrotsStd::Option::Option<std::tuple<Components...>> next() override
+            Option<std::tuple<Components...>> next() override
             {
                 if (m_current_row >= m_query->row_count(m_current_table_id))
                 {
@@ -34,11 +36,11 @@ namespace CarrotsEcs
                 }
                 if (m_current_table_id >= m_query->table_count())
                 {
-                    return CarrotsStd::Option::None;
+                    return None;
                 }
                 std::tuple<Components...> current_tuple = build_tuple();
                 m_current_row += 1;
-                return CarrotsStd::Option::Some(std::move(current_tuple));
+                return Some(std::move(current_tuple));
             }
 
         private:
