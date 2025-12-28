@@ -1,10 +1,10 @@
-#include "Carrots.hpp"
+#include <carrots.hpp>
 
 #include <tracing.hpp>
 
 #include <iostream>
 
-using namespace Carrots::prelude;
+using namespace carrots::prelude;
 
 void hello_world()
 {

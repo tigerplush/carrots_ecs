@@ -3,7 +3,7 @@
 
 #include <carrots_internal.hpp>
 
-namespace Carrots
+namespace carrots
 {
     using namespace carrots_internal;
 } // namespace Carrots

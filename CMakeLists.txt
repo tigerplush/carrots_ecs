@@ -16,7 +16,7 @@ target_sources(carrots
         BASE_DIRS
             src
         FILES
-            src/Carrots.hpp
+            src/carrots.hpp
 )
 
 target_link_libraries(carrots
