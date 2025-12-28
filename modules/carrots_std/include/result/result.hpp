@@ -8,43 +8,62 @@ namespace carrots_std
 {
     namespace result
     {
+
+        template<typename T, typename E>
+        class Result;
+
+        template<typename T>
+        struct Ok
+        {
+        public:
+            explicit Ok(T &&t_value) : m_value(std::move(t_value)) {}
+        private:
+            T m_value;
+            template<typename U, typename V>
+            friend class Result;
+        };
+        
+        template<typename E>
+        struct Err
+        {
+        public:
+            explicit Err(E &&t_error) : m_error(std::move(t_error)) {}
+        private:
+            E m_error;
+            template<typename U, typename V>
+            friend class Result;
+        };
+
         template<typename T, typename E>
         class Result
         {
         public:
-            static Result Ok(T &&value)
+            Result(Ok<T> &&ok) : m_result(OkTag{std::move(ok.m_value)})
             {
-                return Result(value, ResultType::Ok);
             }
-            static Result Err(E &&error)
+            Result(Err<E> &&err) : m_result(ErrTag{std::move(err.m_error)})
             {
-                return Result(error, ResultType::Err);
             }
         public:
             bool is_ok() const
             {
-                return ResultType::Ok == m_result_type;
+                return std::holds_alternative<OkTag>(m_result);
             }
             bool is_err() const
             {
                 return !is_ok();
             }
         private:
-            enum class ResultType
+            struct OkTag
             {
-                Ok,
-                Err
+                T value;
+            };
+            struct ErrTag
+            {
+                E error;
             };
         private:
-            Result(T &&t_value, ResultType t_result_type) : m_result(std::move(t_value)), m_result_type(t_result_type)
-            {
-            }
-            Result(E &&t_error, ResultType t_result_type) : m_result(std::move(t_error)), m_result_type(t_result_type)
-            {
-            }
-        private:
-            ResultType m_result_type;
-            std::variant<T, E> m_result;
+            std::variant<OkTag, ErrTag> m_result;
         };
     } // namespace result
 } // namespace carrots_std
