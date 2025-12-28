@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "plugin/Plugin.hpp"
 
-using namespace CarrotsApp::Plugin;
+using namespace carrots_app::plugin;
 
 TEST(PluginTest, Plugin)
 {

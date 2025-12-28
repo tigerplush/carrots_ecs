@@ -6,12 +6,12 @@
 #include <CarrotsEcs.hpp>
 #include <CarrotsStd.hpp>
 
-#include "IApp.hpp"
-#include "SubApps.hpp"
+#include "app_traits.hpp"
+#include "sub_apps.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         using namespace CarrotsStd::Option;
         using ScheduleLabel = CarrotsEcs::ScheduleLabel;
@@ -90,7 +90,7 @@ namespace CarrotsApp
         /// @param app
         /// @return
         size_t run_once(App &app);
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
 
 #endif

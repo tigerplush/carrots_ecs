@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "app/App.hpp"
 
-using namespace CarrotsApp::App;
+using namespace carrots_app::app;
 
 TEST(AppTest, AppCreate)
 {

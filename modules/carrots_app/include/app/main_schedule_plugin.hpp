@@ -3,21 +3,21 @@
 
 #include <CarrotsEcs.hpp>
 
-#include "IApp.hpp"
-#include "plugin/Plugin.hpp"
+#include "app_traits.hpp"
+#include "plugin/plugin.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
-        using IPlugin = CarrotsApp::Plugin::IPlugin;
+        using IPlugin = carrots_app::plugin::IPlugin;
         class MainSchedulePlugin : public IPlugin
         {
         public:
             void build(IApp &app) override;
         };
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
 
 
 #endif

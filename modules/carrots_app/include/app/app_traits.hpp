@@ -3,14 +3,14 @@
 
 #include <CarrotsEcs.hpp>
 
-#include "plugin/Plugin.hpp"
+#include "plugin/plugin.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         using ComponentId = CarrotsEcs::ComponentId;
-        using IPlugin = CarrotsApp::Plugin::IPlugin;
+        using IPlugin = carrots_app::plugin::IPlugin;
         using ScheduleLabel = CarrotsEcs::ScheduleLabel;
         using World = CarrotsEcs::World::World;
         /// App interface
@@ -45,7 +45,7 @@ namespace CarrotsApp
         protected:
             virtual World &get_world() = 0;
         };
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
 
 #endif

@@ -1,13 +1,13 @@
 #ifndef CARROTS_INTERNAL_PRELUDE_HPP_
 #define CARROTS_INTERNAL_PRELUDE_HPP_
 
-#include "CarrotsApp.hpp"
+#include <carrots_app.hpp>
 
 namespace CarrotsInternal
 {
     namespace Prelude
     {
-        using namespace CarrotsApp::App;
+        using namespace carrots_app::app;
     } // namespace Prelude
 } // namespace CarrotsInternal
 

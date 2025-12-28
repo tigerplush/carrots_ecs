@@ -5,11 +5,11 @@
 
 #include <CarrotsEcs.hpp>
 
-#include "IApp.hpp"
+#include "app_traits.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         using ScheduleLabel = CarrotsEcs::ScheduleLabel;
         using World = CarrotsEcs::World::World;
@@ -29,7 +29,7 @@ namespace CarrotsApp
         private:
             World m_world;
         };
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
 
 #endif

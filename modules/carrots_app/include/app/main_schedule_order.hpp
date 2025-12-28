@@ -3,11 +3,11 @@
 
 #include <vector>
 
-#include "MainSchedule.hpp"
+#include "main_schedule.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         class MainScheduleOrder
         {
@@ -38,7 +38,7 @@ namespace CarrotsApp
             std::vector<ScheduleLabel> m_labels;
             std::vector<ScheduleLabel> m_startup_labels;
         };
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
 
 #endif

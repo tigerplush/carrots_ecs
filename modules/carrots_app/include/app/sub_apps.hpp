@@ -3,11 +3,11 @@
 
 #include <vector>
 
-#include "SubApp.hpp"
+#include "sub_app.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         /// Collection of SubApps
         ///
@@ -34,7 +34,7 @@ namespace CarrotsApp
             SubApp m_main_app;
             std::vector<SubApp> m_sub_apps;
         };
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
 
 #endif

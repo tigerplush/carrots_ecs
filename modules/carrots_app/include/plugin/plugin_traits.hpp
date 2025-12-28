@@ -1,23 +1,23 @@
 #ifndef CARROTS_APP_PLUGIN_I_PLUGIN_HPP_
 #define CARROTS_APP_PLUGIN_I_PLUGIN_HPP_
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         // Forward declaration of interface
         class IApp;
     }
-    namespace Plugin
+    namespace plugin
     {
 
         /// Interface for plugins.
         class IPlugin
         {
         public:
-            virtual void build(App::IApp &app) = 0;
+            virtual void build(app::IApp &app) = 0;
         };
-    } // namespace Plugin
-} // namespace CarrotsApp
+    } // namespace plugin
+} // namespace carrots_app
 
 #endif

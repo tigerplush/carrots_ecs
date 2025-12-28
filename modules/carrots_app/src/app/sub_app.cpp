@@ -1,8 +1,8 @@
-#include "app/SubApp.hpp"
+#include "app/sub_app.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         void SubApp::update()
         {
@@ -23,5 +23,5 @@ namespace CarrotsApp
         {
             return m_world;
         }
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app

@@ -1,10 +1,10 @@
-#include "app/App.hpp"
+#include "app/app.hpp"
 
-#include "app/MainSchedulePlugin.hpp"
+#include "app/main_schedule_plugin.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         App App::create()
         {
@@ -64,5 +64,5 @@ namespace CarrotsApp
         {
             return app.should_exit().unwrap_or(0);
         }
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app

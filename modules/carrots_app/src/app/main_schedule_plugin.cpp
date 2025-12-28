@@ -1,12 +1,12 @@
-#include "app/MainSchedulePlugin.hpp"
+#include "app/main_schedule_plugin.hpp"
 
 #include <Tracing.hpp>
 
-#include "app/MainScheduleOrder.hpp"
+#include "app/main_schedule_order.hpp"
 
-namespace CarrotsApp
+namespace carrots_app
 {
-    namespace App
+    namespace app
     {
         void MainSchedulePlugin::build(IApp &app)
         {
@@ -14,5 +14,5 @@ namespace CarrotsApp
             app.insert_resource(MainScheduleOrder::standard());
             TRACE << "Done building MainSchedulePlugin";
         }
-    } // namespace App
-} // namespace CarrotsApp
+    } // namespace app
+} // namespace carrots_app
