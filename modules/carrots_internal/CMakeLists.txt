@@ -7,8 +7,8 @@ target_sources(carrots_internal
         BASE_DIRS
             include
         FILES
-            include/CarrotsInternal.hpp
-            include/Prelude.hpp
+            include/carrots_internal.hpp
+            include/prelude.hpp
 )
 
 target_link_libraries(carrots_internal

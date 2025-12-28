@@ -3,12 +3,12 @@
 
 #include <carrots_app.hpp>
 
-namespace CarrotsInternal
+namespace carrots_internal
 {
-    namespace Prelude
+    namespace prelude
     {
         using namespace carrots_app::app;
-    } // namespace Prelude
-} // namespace CarrotsInternal
+    } // namespace prelude
+} // namespace carrots_internal
 
 #endif

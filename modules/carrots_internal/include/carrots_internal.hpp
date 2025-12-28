@@ -1,12 +1,12 @@
 #ifndef CARROTS_INTERNAL_CARROTS_INTERNAL_HPP_
 #define CARROTS_INTERNAL_CARROTS_INTERNAL_HPP_
 
-#include "Prelude.hpp"
+#include "prelude.hpp"
 
-namespace CarrotsInternal
+namespace carrots_internal
 {
     
-} // namespace CarrotsInternal
+} // namespace carrots_internal
 
 
 #endif

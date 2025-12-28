@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace Carrots::Prelude;
+using namespace Carrots::prelude;
 
 void hello_world()
 {
