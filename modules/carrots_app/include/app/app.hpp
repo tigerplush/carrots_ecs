@@ -73,7 +73,7 @@ namespace carrots_app
             /// Creates an new app with some default structure to enable core engine features.
             /// This is the preferred constructor for most cases.
             /// @return
-            static App standard();
+            static App preset();
 
         private:
             /// Creates an app with a given runner

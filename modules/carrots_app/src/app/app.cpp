@@ -8,7 +8,7 @@ namespace carrots_app
     {
         App App::create()
         {
-            return App::standard();
+            return App::preset();
         }
 
         void App::update()
@@ -48,7 +48,7 @@ namespace carrots_app
             return App(run_once);
         }
 
-        App App::standard()
+        App App::preset()
         {
             App app = App::empty();
             app.add_plugin(MainSchedulePlugin());

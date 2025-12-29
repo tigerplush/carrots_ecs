@@ -12,7 +12,7 @@ namespace carrots_app
         class MainScheduleOrder
         {
         public:
-            static MainScheduleOrder standard()
+            static MainScheduleOrder preset()
             {
                 return MainScheduleOrder(
                     {

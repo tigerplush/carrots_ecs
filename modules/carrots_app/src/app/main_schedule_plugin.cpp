@@ -11,7 +11,7 @@ namespace carrots_app
         void MainSchedulePlugin::build(IApp &app)
         {
             TRACE << "Building MainSchedulePlugin";
-            app.insert_resource(MainScheduleOrder::standard());
+            app.insert_resource(MainScheduleOrder::preset());
             TRACE << "Done building MainSchedulePlugin";
         }
     } // namespace app
