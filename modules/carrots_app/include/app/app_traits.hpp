@@ -1,7 +1,7 @@
 #ifndef CARROTS_APP_APP_I_APP_HPP_
 #define CARROTS_APP_APP_I_APP_HPP_
 
-#include <CarrotsEcs.hpp>
+#include <carrots_ecs.hpp>
 
 #include "plugin/plugin.hpp"
 
@@ -9,10 +9,10 @@ namespace carrots_app
 {
     namespace app
     {
-        using ComponentId = CarrotsEcs::ComponentId;
         using IPlugin = carrots_app::plugin::IPlugin;
-        using ScheduleLabel = CarrotsEcs::ScheduleLabel;
-        using World = CarrotsEcs::World::World;
+        using ComponentId = carrots_ecs::ComponentId;
+        using ScheduleLabel = carrots_ecs::ScheduleLabel;
+        using World = carrots_ecs::World;
         /// App interface
         ///
         /// Internally, plugins are basically AppBuilders.

@@ -1,7 +1,7 @@
 #ifndef CARROTS_APP_MAIN_SCHEDULE_PLUGIN_HPP_
 #define CARROTS_APP_MAIN_SCHEDULE_PLUGIN_HPP_
 
-#include <CarrotsEcs.hpp>
+#include <carrots_ecs.hpp>
 
 #include "app_traits.hpp"
 #include "plugin/plugin.hpp"

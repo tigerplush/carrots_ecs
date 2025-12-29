@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include <CarrotsEcs.hpp>
+#include <carrots_ecs.hpp>
 
 #include "app_traits.hpp"
 
@@ -11,8 +11,8 @@ namespace carrots_app
 {
     namespace app
     {
-        using ScheduleLabel = CarrotsEcs::ScheduleLabel;
-        using World = CarrotsEcs::World::World;
+        using ScheduleLabel = carrots_ecs::ScheduleLabel;
+        using World = carrots_ecs::World;
         /// SubApps can be added to an app via `app.add_plugin(plugin)` API.
         /// Each plugin will then be built calling its `plugin.build()` function
         /// which in turn creates a subapp, that is added to the list of subapps

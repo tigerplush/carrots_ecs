@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include <CarrotsEcs.hpp>
+#include <carrots_ecs.hpp>
 #include <carrots_std.hpp>
 
 #include "app_traits.hpp"
@@ -14,7 +14,7 @@ namespace carrots_app
     namespace app
     {
         using namespace carrots_std;
-        using ScheduleLabel = CarrotsEcs::ScheduleLabel;
+        using ScheduleLabel = carrots_ecs::ScheduleLabel;
         /// An App brings together plugins and systems
         ///
         /// Create a new App with `App::create()`.
