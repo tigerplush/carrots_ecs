@@ -1,5 +1,3 @@
-add_subdirectory(log)
-
 add_library(carrots_log INTERFACE)
 
 target_sources(carrots_log
@@ -8,7 +6,7 @@ target_sources(carrots_log
         BASE_DIRS
             include
         FILES
-            include/CarrotsLog.hpp
+            include/carrots_log.hpp
 )
 
 target_link_libraries(carrots_log
