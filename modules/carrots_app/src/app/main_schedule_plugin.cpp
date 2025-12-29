@@ -8,6 +8,7 @@ namespace carrots_app
 {
     namespace app
     {
+        MODULE("carrots_app::app")
         void MainSchedulePlugin::build(IApp &app)
         {
             TRACE << "Building MainSchedulePlugin";

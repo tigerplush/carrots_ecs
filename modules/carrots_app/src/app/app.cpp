@@ -1,5 +1,6 @@
 #include "app/app.hpp"
 
+#include "app/main_schedule.hpp"
 #include "app/main_schedule_plugin.hpp"
 
 namespace carrots_app
@@ -51,6 +52,7 @@ namespace carrots_app
         App App::preset()
         {
             App app = App::empty();
+            app.m_sub_apps.get_main_app().update_schedule = Some(Main);
             app.add_plugin(MainSchedulePlugin());
             return app;
         }

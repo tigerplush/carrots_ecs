@@ -23,5 +23,13 @@ namespace carrots_app
         {
             return m_world;
         }
+
+        void SubApp::run_default_schedule()
+        {
+            if(update_schedule.is_some())
+            {
+                m_world.run_schedule(update_schedule.unwrap());
+            }
+        }
     } // namespace app
 } // namespace carrots_app

@@ -8,6 +8,8 @@ namespace carrots_app
     namespace app
     {
         using ScheduleLabel = carrots_ecs::ScheduleLabel;
+        /// Main Schedule
+        static constexpr ScheduleLabel Main("MAIN");
         /// Default Schedule for Startup. Will be called once at startup.
         static constexpr ScheduleLabel Startup("STARTUP");
         /// Default Schedule for Update. Will be called once every frame.

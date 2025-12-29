@@ -18,7 +18,7 @@ namespace carrots_std
         /// Represents an optional value.
         ///
         /// Optional values either are Some(value) or None.
-        /// @tparam T 
+        /// @tparam T
         template <typename T>
         class Option
         {
@@ -29,6 +29,11 @@ namespace carrots_std
                                                    T>;
 
         public:
+            constexpr Option() noexcept
+                : m_has_value(false)
+            {
+            }
+
             constexpr Option(NoneType) noexcept
                 : m_has_value(false)
             {
@@ -82,7 +87,7 @@ namespace carrots_std
 
             T unwrap_or(T value_when_none) const
             {
-                if(is_some())
+                if (is_some())
                 {
                     return value();
                 }
@@ -101,12 +106,11 @@ namespace carrots_std
             /// Option<int> x = None;
             /// assert(x.is_some() == false);
             /// ```
-            /// @return 
+            /// @return
             bool is_some() const
             {
                 return m_has_value;
             }
-
 
             /// Returns true if the option is a `None` value.
             ///
@@ -120,7 +124,7 @@ namespace carrots_std
             /// Option<int> x = None;
             /// assert(x.is_none() == true);
             /// ```
-            /// @return 
+            /// @return
             bool is_none() const
             {
                 return !is_some();
@@ -161,6 +165,12 @@ namespace carrots_std
         Option<T &> Some(T &value)
         {
             return Option<T &>(value);
+        }
+
+        template <typename T>
+        Option<std::decay_t<T>> Some(const T &value)
+        {
+            return Option<std::decay_t<T>>(value);
         }
 
         // For rvalues - take by value

@@ -3,6 +3,7 @@
 
 #include <functional>
 
+#include <carrots_std.hpp>
 #include <carrots_ecs.hpp>
 
 #include "app_traits.hpp"
@@ -11,6 +12,7 @@ namespace carrots_app
 {
     namespace app
     {
+        using namespace carrots_std;
         using ScheduleLabel = carrots_ecs::ScheduleLabel;
         using World = carrots_ecs::World;
         /// SubApps can be added to an app via `app.add_plugin(plugin)` API.
@@ -25,7 +27,10 @@ namespace carrots_app
             SubApp &add_system(ScheduleLabel label, std::function<void()> system) override;
         public:
             World &get_world() override;
-
+        public:
+            void run_default_schedule();
+        public:
+            Option<ScheduleLabel> update_schedule;
         private:
             World m_world;
         };

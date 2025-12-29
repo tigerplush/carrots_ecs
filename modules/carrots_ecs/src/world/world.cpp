@@ -18,5 +18,9 @@ namespace carrots_ecs
         {
             return m_archetype_to_table_id;
         }
+
+        void World::run_schedule(ScheduleLabel label)
+        {
+        }
     } // namespace World
 } // namespace carrots_ecs

@@ -9,6 +9,7 @@
 #include "archetype/archetype.hpp"
 #include "archetype/archetype_hasher.hpp"
 #include "entity/entity.hpp"
+#include "schedule/schedule_label.hpp"
 #include "table/table.hpp"
 #include "table/table_id.hpp"
 
@@ -22,6 +23,7 @@ namespace carrots_ecs
         using Archetype = carrots_ecs::archetype::Archetype;
         using ArchetypeHasher = carrots_ecs::archetype::ArchetypeHasher;
         using Entity = carrots_ecs::entity::Entity;
+        using ScheduleLabel = carrots_ecs::schedule::ScheduleLabel;
         using Table = carrots_ecs::table::Table;
         using TableId = carrots_ecs::table::TableId;
         using TableRow = carrots_ecs::table::TableRow;
@@ -67,6 +69,8 @@ namespace carrots_ecs
 
             const std::vector<Table> &get_tables() const;
             const std::unordered_map<Archetype, TableId, ArchetypeHasher> &get_archetypes() const;
+        public:
+            void run_schedule(ScheduleLabel label);
 
         private:
             std::vector<Table> m_tables;

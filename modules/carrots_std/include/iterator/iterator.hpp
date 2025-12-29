@@ -106,7 +106,11 @@ namespace carrots_std
                 return iterator();
             }
         public:
-            /// Checks if all values of an iterator fulfill a given predicate
+            /// Checks if all values of an iterator fulfill a given predicate,
+            /// thus consuming the iterator.
+            ///
+            /// This function is short circuiting, i.e. it will return at the first instance
+            /// that does not fulfill the predicate and return false.
             /// @return 
             bool all(std::function<bool(const OutputType&)> f)
             {
@@ -123,6 +127,7 @@ namespace carrots_std
                 };
                 return try_fold({}, check).is_ok();
             }
+
             /// Consumes the iterator and returns a collection of
             /// all its values.
             /// @tparam Collection 
