@@ -17,6 +17,11 @@ namespace carrots_app
             m_sub_apps.update();
         }
 
+        App &App::add_schedule(Schedule schedule)
+        {
+            return *this;
+        }
+
         App &App::add_plugin(IPlugin &&plugin)
         {
             plugin.build(*this);

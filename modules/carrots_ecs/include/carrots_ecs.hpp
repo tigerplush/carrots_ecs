@@ -5,7 +5,9 @@
 #include "component/component_id.hpp"
 #include "entity/entity.hpp"
 #include "query/query.hpp"
+#include "schedule/schedule_label.hpp"
 #include "schedule/schedule.hpp"
+#include "schedule/schedules.hpp"
 #include "table/table.hpp"
 #include "world/world.hpp"
 

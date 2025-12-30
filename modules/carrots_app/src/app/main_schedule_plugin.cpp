@@ -8,12 +8,22 @@ namespace carrots_app
 {
     namespace app
     {
+        using Schedule = carrots_ecs::Schedule;
         MODULE("carrots_app::app")
         void MainSchedulePlugin::build(IApp &app)
         {
             TRACE << "Building MainSchedulePlugin";
-            app.insert_resource(MainScheduleOrder::preset());
+            Schedule main(Main);
+            app
+                .add_schedule(main)
+                .insert_resource(MainScheduleOrder::preset())
+                .add_system(Main, run_main);
             TRACE << "Done building MainSchedulePlugin";
+        }
+
+        void run_main()
+        {
+
         }
     } // namespace app
 } // namespace carrots_app

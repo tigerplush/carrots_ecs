@@ -12,6 +12,7 @@ namespace carrots_app
         using IPlugin = carrots_app::plugin::IPlugin;
         using ComponentId = carrots_ecs::ComponentId;
         using ScheduleLabel = carrots_ecs::ScheduleLabel;
+        using Schedule = carrots_ecs::Schedule;
         using World = carrots_ecs::World;
         /// App interface
         ///
@@ -23,6 +24,7 @@ namespace carrots_app
         {
         public:
             virtual void update() = 0;
+            virtual IApp &add_schedule(Schedule schedule) = 0;
             /// Adds a system to a schedule.
             /// @param label 
             /// @param system 

@@ -16,6 +16,8 @@ namespace carrots_app
         public:
             void build(IApp &app) override;
         };
+
+        void run_main();
     } // namespace app
 } // namespace carrots_app
 

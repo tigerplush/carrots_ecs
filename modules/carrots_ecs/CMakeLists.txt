@@ -32,6 +32,7 @@ target_sources(carrots_ecs
             include/query/query.hpp
             include/schedule/schedule_label.hpp
             include/schedule/schedule.hpp
+            include/schedule/schedules.hpp
             include/table/column_id.hpp
             include/table/column_traits.hpp
             include/table/column.hpp

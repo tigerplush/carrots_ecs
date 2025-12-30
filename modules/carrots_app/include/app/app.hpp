@@ -15,6 +15,7 @@ namespace carrots_app
     {
         using namespace carrots_std;
         using ScheduleLabel = carrots_ecs::ScheduleLabel;
+        using Schedule = carrots_ecs::Schedule;
         /// An App brings together plugins and systems
         ///
         /// Create a new App with `App::create()`.
@@ -41,6 +42,7 @@ namespace carrots_app
 
         public:
             void update() override;
+            App &add_schedule(Schedule schedule) override;
             App &add_plugin(IPlugin &&plugin) override;
             /// Adds a system to a schedule.
             /// @param label

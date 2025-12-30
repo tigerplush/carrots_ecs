@@ -7,7 +7,13 @@ namespace carrots_ecs
 {
     namespace schedule
     {
-
+        class Schedule
+        {
+        public:
+            Schedule(ScheduleLabel t_label) : m_label(t_label){}
+        private:
+            ScheduleLabel m_label;
+        };
     } // namespace Schedule
 } // namespace carrots_ecs
 

@@ -7,6 +7,11 @@ namespace carrots_app
         void SubApp::update()
         {
         }
+        
+        SubApp &SubApp::add_schedule(Schedule schedule)
+        {
+            return *this;
+        }
 
         SubApp &SubApp::add_plugin(IPlugin &&plugin)
         {

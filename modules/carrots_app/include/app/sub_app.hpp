@@ -14,6 +14,7 @@ namespace carrots_app
     {
         using namespace carrots_std;
         using ScheduleLabel = carrots_ecs::ScheduleLabel;
+        using Schedule = carrots_ecs::Schedule;
         using World = carrots_ecs::World;
         /// SubApps can be added to an app via `app.add_plugin(plugin)` API.
         /// Each plugin will then be built calling its `plugin.build()` function
@@ -23,6 +24,7 @@ namespace carrots_app
         {
         public:
             void update() override;
+            SubApp &add_schedule(Schedule schedule) override;
             SubApp &add_plugin(IPlugin &&plugin) override;
             SubApp &add_system(ScheduleLabel label, std::function<void()> system) override;
         public:
