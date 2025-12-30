@@ -6,7 +6,7 @@ namespace carrots_ecs
     {
         bool World::is_empty() const
         {
-            return m_archetype_to_table_id.empty();
+            return m_entities.empty();
         }
 
         const std::vector<Table> &World::get_tables() const
