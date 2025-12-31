@@ -40,6 +40,11 @@ namespace carrots_app
             /// @return
             static App create();
 
+            /// Creates an empty app with a default runner
+            /// that will run the Main Schedule exactly once and
+            /// then return.
+            /// @return
+            static App empty();
         public:
             void update() override;
             App &add_schedule(Schedule schedule) override;
@@ -67,11 +72,6 @@ namespace carrots_app
             World &get_world() override;
 
         private:
-            /// Creates an empty app with a default runner
-            /// that will run all schedules exactly once and
-            /// then return
-            /// @return
-            static App empty();
             /// Creates an new app with some default structure to enable core engine features.
             /// This is the preferred constructor for most cases.
             /// @return
