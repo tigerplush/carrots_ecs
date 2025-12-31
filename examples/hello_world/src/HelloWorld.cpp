@@ -2,13 +2,11 @@
 
 #include <tracing.hpp>
 
-#include <iostream>
-
 using namespace carrots::prelude;
 
 void hello_world()
 {
-    std::cout << "Hello World!";
+    INFO << "Hello World!";
 }
 
 int main()

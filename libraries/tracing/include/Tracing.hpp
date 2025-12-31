@@ -11,8 +11,6 @@ namespace {
     namespace { constexpr const char* TRACING_CURRENT_MODULE = name; }
 
 #define LOG(severity) tracing::LogLine(TRACING_CURRENT_MODULE, severity)
-#define LOG(severity) tracing::LogLine(TRACING_CURRENT_MODULE, severity)
-
 
 #define TRACE LOG(tracing::LogLevelEnum::Trace)
 #define DEBUG LOG(tracing::LogLevelEnum::Debug)
