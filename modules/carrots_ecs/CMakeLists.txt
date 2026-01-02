@@ -56,6 +56,7 @@ set_target_properties(carrots_ecs PROPERTIES FOLDER "modules/carrots_ecs")
 add_executable(carrots_ecs_tests
     tests/archetype_tests.cpp
     tests/component_id_tests.cpp
+    tests/column_tests.cpp
     tests/entity_tests.cpp
     tests/query_tests.cpp
     tests/schedule_tests.cpp
