@@ -1,6 +1,7 @@
 #ifndef CARROTS_STD_OPTION_OPTION_HPP_
 #define CARROTS_STD_OPTION_OPTION_HPP_
 
+#include <functional>
 #include <type_traits>
 
 namespace carrots_std
@@ -92,6 +93,16 @@ namespace carrots_std
                     return value();
                 }
                 return value_when_none;
+            }
+
+            template<typename F>
+            T unwrap_or_else(F&& f)
+            {
+                if (is_some())
+                {
+                    return value();
+                }
+                return std::forward<F>(f)();
             }
 
             /// Returns true if the option is a `Some` value.
