@@ -11,6 +11,8 @@ namespace carrots_ecs
         class IColumn
         {
         public:
+            virtual ~IColumn() {}
+        public:
             virtual void* at(TableRow row) = 0;
             virtual const void* at(TableRow row) const = 0;
         };
