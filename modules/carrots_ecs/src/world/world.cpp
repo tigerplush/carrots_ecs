@@ -6,32 +6,37 @@ namespace carrots_ecs
     {
         bool World::is_empty() const
         {
-            return m_entities.empty();
+            return m_entities.is_empty();
         }
 
-        const std::vector<Table> &World::get_tables() const
+        Archetypes &World::get_archetypes()
+        {
+            return m_archetypes;
+        }
+
+        const Archetypes &World::get_archetypes() const
+        {
+            return m_archetypes;
+        }
+
+        Entities &World::get_entities()
+        {
+            return m_entities;
+        }
+
+        const Entities &World::get_entities() const
+        {
+            return m_entities;
+        }
+
+        Tables &World::get_tables()
         {
             return m_tables;
         }
 
-        const std::unordered_map<Archetype, TableId, ArchetypeHasher> &World::get_archetypes() const
+        const Tables &World::get_tables() const
         {
-            return m_archetype_to_table_id;
-        }
-
-        void World::add_schedule(Schedule schedule)
-        {
-            // get a mutable reference to Schedules
-            // if it doesn't exist, spawn it
-            // add the given schedule
-        }
-
-        void World::run_schedule(ScheduleLabel label)
-        {
-            // get a mutable reference to Schedules
-            // remove the current schedule
-            // run the current schedule
-            // add it back in
+            return m_tables;
         }
     } // namespace World
 } // namespace carrots_ecs

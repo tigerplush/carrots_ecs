@@ -1,9 +1,14 @@
-#include "world/entity_meta.hpp"
+#include "entity/entity_meta.hpp"
 
 namespace carrots_ecs
 {
-    namespace world
+    namespace entity
     {
+        EntityMeta::EntityMeta() : m_table_id(None), m_table_row(None)
+        {
+            
+        }
+
         EntityMeta::EntityMeta(
             TableId t_table_id
             , TableRow t_table_row

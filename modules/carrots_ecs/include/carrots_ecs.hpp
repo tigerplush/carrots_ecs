@@ -8,6 +8,7 @@
 #include "schedule/schedule_label.hpp"
 #include "schedule/schedule.hpp"
 #include "schedule/schedules.hpp"
+#include "spawner/spawner.hpp"
 #include "table/table.hpp"
 #include "world/world.hpp"
 
@@ -18,6 +19,7 @@ namespace carrots_ecs
     using namespace carrots_ecs::entity;
     using namespace carrots_ecs::query;
     using namespace carrots_ecs::schedule;
+    using namespace carrots_ecs::spawner;
     using namespace carrots_ecs::table;
     using namespace carrots_ecs::world;
 } // namespace carrots_ecs

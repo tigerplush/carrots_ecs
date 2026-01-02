@@ -33,7 +33,7 @@ namespace carrots_app
         {
             if(update_schedule.is_some())
             {
-                m_world.run_schedule(update_schedule.unwrap());
+                // m_world.run_schedule(update_schedule.unwrap());
             }
         }
     } // namespace app

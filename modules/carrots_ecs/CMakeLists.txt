@@ -5,12 +5,12 @@ project(carrots_ecs VERSION 0.0.1 LANGUAGES CXX)
 add_library(carrots_ecs STATIC
     src/archetype/archetype.cpp
     src/component/component_id.cpp
+    src/entity/entity_meta.cpp
     src/entity/entity.cpp
     src/table/column_id.cpp
     src/table/table_id.cpp
     src/table/table_row.cpp
     src/table/table.cpp
-    src/world/entity_meta.cpp
     src/world/world.cpp
 )
 
@@ -23,7 +23,9 @@ target_sources(carrots_ecs
             include/carrots_ecs.hpp
             include/archetype/archetype_hasher.hpp
             include/archetype/archetype.hpp
+            include/archetype/archetypes.hpp
             include/component/component_id.hpp
+            include/entity/entity_meta.hpp
             include/entity/entity.hpp
             include/query/components.hpp
             include/query/filters.hpp
@@ -39,7 +41,7 @@ target_sources(carrots_ecs
             include/table/table_id.hpp
             include/table/table_row.hpp
             include/table/table.hpp
-            include/world/entity_meta.hpp
+            include/table/tables.hpp
             include/world/world.hpp
 )
 
@@ -50,7 +52,6 @@ target_link_libraries(carrots_ecs
 )
 
 set_target_properties(carrots_ecs PROPERTIES FOLDER "modules/carrots_ecs")
-
 
 # Tests
 add_executable(carrots_ecs_tests

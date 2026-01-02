@@ -15,6 +15,7 @@ namespace carrots_ecs
         public:
             virtual void* at(TableRow row) = 0;
             virtual const void* at(TableRow row) const = 0;
+            virtual size_t count() const = 0;
         };
     } // namespace Table
 } // namespace carrots_ecs

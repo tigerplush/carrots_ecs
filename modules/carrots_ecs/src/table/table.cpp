@@ -27,6 +27,7 @@ namespace carrots_ecs
         const std::unique_ptr<IColumn> &Table::get_column(const ComponentId &component_id) const
         {
             ColumnId column_id = m_component_id_to_column_id.at(component_id);
+            std::cout << "IColumn pointer for get: " << m_columns[column_id.id()].get() << std::endl;
             return m_columns.at(column_id.id());
         }
         

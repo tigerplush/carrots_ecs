@@ -23,6 +23,6 @@ TEST(WorldTest, InsertComponent)
 {
     World world;
     EXPECT_EQ(world.is_empty(), true);
-    world.spawn(Position {});
+    Spawner spawn(world, Position {});
     EXPECT_EQ(world.is_empty(), false);
 }

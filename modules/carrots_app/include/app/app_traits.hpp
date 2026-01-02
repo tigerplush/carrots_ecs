@@ -13,6 +13,7 @@ namespace carrots_app
         using ComponentId = carrots_ecs::ComponentId;
         using ScheduleLabel = carrots_ecs::ScheduleLabel;
         using Schedule = carrots_ecs::Schedule;
+        using Spawner = carrots_ecs::Spawner;
         using World = carrots_ecs::World;
         /// App interface
         ///
@@ -41,7 +42,7 @@ namespace carrots_app
             template<typename Component>
             IApp &insert_resource(Component &&component)
             {
-                get_world().spawn(component);
+                Spawner spawner(get_world(), component);
                 return *this;
             }
         protected:

@@ -14,12 +14,12 @@ struct Velocity
 TEST(QueryTest, CreateQuery)
 {
     World world;
-    world.spawn(Position {});
+    Spawner spawner(world, Position {});
     Query<Components<Position&>> query = Query<Components<Position&>>(world);
     EXPECT_EQ(query.matching_tables(), 1);
     EXPECT_EQ(query.iter().count(), 1);
     EXPECT_EQ(query.count(), 1);
-    world.spawn(Position {}, Velocity {});
+    Spawner second_spawner(world, Position {}, Velocity {});
     Query<Components<Position&>> secondQuery = Query<Components<Position&>>(world);
     EXPECT_EQ(secondQuery.matching_tables(), 2);
     EXPECT_EQ(secondQuery.count(), 2);
@@ -28,7 +28,7 @@ TEST(QueryTest, CreateQuery)
 TEST(QueryTest, IterQuery)
 {
     World world;
-    world.spawn(Position {});
+    Spawner spawner(world, Position {});
     Query<Components<Entity, Position&>> query = Query<Components<Entity, Position&>>(world);
     for(auto [entity, pos]: query.iter())
     {
@@ -39,7 +39,7 @@ TEST(QueryTest, IterQuery)
 TEST(QueryTest, IterConstQuery)
 {
     World world;
-    world.spawn(Position {});
+    Spawner spawner(world, Position {});
     Query<Components<Entity, const Position&>> query = Query<Components<Entity, const Position&>>(world);
     for(auto [entity, pos]: query.iter())
     {

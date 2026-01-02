@@ -6,94 +6,41 @@
 
 #include <tracing.hpp>
 
-#include "archetype/archetype.hpp"
-#include "archetype/archetype_hasher.hpp"
-#include "entity/entity.hpp"
-#include "schedule/schedule_label.hpp"
-#include "schedule/schedule.hpp"
-#include "table/table.hpp"
-#include "table/table_id.hpp"
-
-#include "entity_meta.hpp"
+#include "archetype/archetypes.hpp"
+#include "entity/entities.hpp"
+#include "table/tables.hpp"
 
 namespace carrots_ecs
 {
     namespace world
     {
         MODULE("carrots_ecs::world")
-        using Archetype = carrots_ecs::archetype::Archetype;
-        using ArchetypeHasher = carrots_ecs::archetype::ArchetypeHasher;
-        using Entity = carrots_ecs::entity::Entity;
-        using ScheduleLabel = carrots_ecs::schedule::ScheduleLabel;
-        using Schedule = carrots_ecs::schedule::Schedule;
-        using Table = carrots_ecs::table::Table;
-        using TableId = carrots_ecs::table::TableId;
-        using TableRow = carrots_ecs::table::TableRow;
-        /// A world stores Tables for all Archetypes
+        using Archetypes = carrots_ecs::archetype::Archetypes;
+        using Entities = carrots_ecs::entity::Entities;
+        using Tables = carrots_ecs::table::Tables;
+        /// A World is the central storage for everything.
+        ///
+        /// This class should only hold data and manage it. It is not responsible
+        /// for creating and removing entities, components, etc.
         class World
         {
         public:
-            /// Spawns an Entity with the given components.
-            ///
-            /// If no table for the component archetype exists, it will be created (lazy initialisation).
-            ///
-            /// # Remarks
-            ///
-            /// I'm not sure about register_table<...>. It checks if there is a table for an archetype already.
-            /// We check a second time in this function. I think this could be simplified, have to think about that.
-            /// @tparam ...Components
-            /// @param ...components
-            /// @return
-            template <typename... Components>
-            Entity spawn(Components... components)
-            {
-                Archetype archetype = Archetype::from<Components...>();
-                TRACE << "Spawning entity of " << archetype;
-                if (m_archetype_to_table_id.find(archetype) == m_archetype_to_table_id.end())
-                {
-                    TRACE << archetype << " was previously unknown, creating table...";
-                    // No table, register one
-                    register_table<Components...>();
-                }
-                // Now, a table definitely exists
-                Entity entity(m_entities.size());
-                TableId table_id = m_archetype_to_table_id.at(archetype);
-                Table &table = m_tables[table_id.id()];
-                TableRow table_row = table.insert(entity, components...);
-                m_entities.emplace_back(EntityMeta(table_id, table_row));
-                TRACE << "Placed " << entity << " in " << table_id << " @ " << table_row;
-                return entity;
-            }
-
             /// Returns if the world is currently empty, meaning it has no Entities.
             /// @return 
             bool is_empty() const;
 
-            const std::vector<Table> &get_tables() const;
-            const std::unordered_map<Archetype, TableId, ArchetypeHasher> &get_archetypes() const;
-        public:
-            void add_schedule(Schedule schedule);
-            void run_schedule(ScheduleLabel label);
+            Archetypes &get_archetypes();
+            const Archetypes &get_archetypes() const;
 
-        private:
-            std::vector<Table> m_tables;
-            std::unordered_map<Archetype, TableId, ArchetypeHasher> m_archetype_to_table_id;
-            std::vector<EntityMeta> m_entities;
+            Entities &get_entities();
+            const Entities &get_entities() const;
 
+            Tables &get_tables();
+            const Tables &get_tables() const;
         private:
-            template <typename... Components>
-            void register_table()
-            {
-                Archetype archetype = Archetype::from<Components...>();
-                if (m_archetype_to_table_id.find(archetype) == m_archetype_to_table_id.end())
-                {
-                    TableId table_id(m_archetype_to_table_id.size());
-                    m_archetype_to_table_id.emplace(archetype, table_id);
-                    Table table = Table::from<Components...>();
-                    m_tables.emplace_back(std::move(table));
-                    // m_tables.emplace_back(Table::from<Components...>());
-                }
-            }
+            Archetypes m_archetypes;
+            Entities m_entities;
+            Tables m_tables;
         };
     } // namespace World
 } // namespace carrots_ecs

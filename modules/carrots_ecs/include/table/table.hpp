@@ -1,6 +1,7 @@
 #ifndef CARROTS_ECS_TABLE_TABLE_HPP_
 #define CARROTS_ECS_TABLE_TABLE_HPP_
 
+#include <iostream>
 #include <memory>
 #include <ostream>
 #include <unordered_map>
@@ -63,11 +64,14 @@ namespace carrots_ecs
             /// @param ...components
             /// @return
             template <typename... Components>
-            TableRow insert(Entity entity, Components... components)
+            TableRow insert(Entity entity, Components &&...components)
             {
-                TableRow row(m_entities.size());
+                std::cout << "Trying to insert " << entity << std::endl;
+                std::cout << *this << std::endl;
                 m_entities.emplace_back(entity);
-                (add_component(components), ...);
+                TableRow row(m_entities.size() - 1);
+                (add_component(std::forward<Components>(components)), ...);
+                std::cout << *this << std::endl;
                 return row;
             }
             /// @brief Retrieves the entity from the given row
@@ -76,6 +80,17 @@ namespace carrots_ecs
             const Entity &get_entity(TableRow row) const;
 
             const std::unique_ptr<IColumn> &get_column(const ComponentId &component_id) const;
+            template<typename Component>
+            Column<Component> &get_column()
+            {
+                ComponentId component_id = ComponentId::from<Component>();
+                std::cout << "Trying to fetch column for " << component_id;
+                ColumnId column_id = m_component_id_to_column_id.at(component_id);
+                std::cout << component_id << " has " << column_id << std::endl;
+                Column<Component> *column = static_cast<Column<Component> *>(m_columns[column_id.id()].get());
+                return *column;
+            }
+
             /// @brief Retrieves a void const ptr to a component from the given column and row
             /// @param row
             void const *get_component(ComponentId component_id, TableRow row) const;
@@ -101,6 +116,41 @@ namespace carrots_ecs
                 }
             };
         private:
+            /// Registers a component with the table
+            /// @tparam Component 
+            template <typename Component>
+            void register_component()
+            {
+                ComponentId component_id = ComponentId::from<Component>();
+                std::cout << "Trying to register " << component_id << "..." << std::endl;
+                if (m_component_id_to_column_id.find(component_id) == m_component_id_to_column_id.end())
+                {
+                    std::cout << component_id << " is new, creating a column" << std::endl;
+                    ColumnId column_id(m_component_id_to_column_id.size());
+
+                    m_component_id_to_column_id.emplace(component_id, column_id);
+                    std::unique_ptr<Column<Component>> column = std::make_unique<Column<Component>>();
+
+                    m_columns.push_back(std::move(column));
+                    std::cout << "Added new column with " << column_id << " for " << component_id << std::endl;
+                }
+            }
+
+            template <typename Component>
+            void add_component(Component &&component)
+            {
+                std::cout << "trying to add " << typeid(Component).name() << std::endl;
+                using DecayedComponent = std::decay_t<Component>;
+                ComponentId component_id = ComponentId::from<DecayedComponent>();
+                ColumnId column_id = m_component_id_to_column_id.at(component_id);
+                std::cout << component_id << " has " << column_id << std::endl;
+                Column<DecayedComponent> *column = static_cast<Column<DecayedComponent> *>(m_columns[column_id.id()].get());
+                std::cout << "inserting into column at " << m_columns[column_id.id()].get() << std::endl;
+                column->emplace_back(std::forward<Component>(component));
+                std::cout << "inserted into column at " << m_columns[column_id.id()].get() << std::endl;
+            }
+
+        private:
             friend std::ostream &operator<<(std::ostream &os, const Table &other)
             {
                 os << "Table { ";
@@ -108,9 +158,9 @@ namespace carrots_ecs
                 os << ", ";
                 os << "component_pairs: { ";
                 auto it = other.m_component_id_to_column_id.begin();
-                for(auto it = other.m_component_id_to_column_id.begin(); it != other.m_component_id_to_column_id.end(); ++it)
+                for (auto it = other.m_component_id_to_column_id.begin(); it != other.m_component_id_to_column_id.end(); ++it)
                 {
-                    if(it != other.m_component_id_to_column_id.begin())
+                    if (it != other.m_component_id_to_column_id.begin())
                     {
                         os << ", ";
                     }
@@ -123,9 +173,9 @@ namespace carrots_ecs
                 }
                 os << " }, ";
                 os << "column_sizes: { ";
-                for(size_t index = 0; index < other.m_columns.size(); index++)
+                for (size_t index = 0; index < other.m_columns.size(); index++)
                 {
-                    if(index != 0)
+                    if (index != 0)
                     {
                         os << ", ";
                     }
@@ -139,29 +189,6 @@ namespace carrots_ecs
             std::vector<Entity> m_entities;
             std::unordered_map<ComponentId, ColumnId, ComponentIdHasher> m_component_id_to_column_id;
             std::vector<std::unique_ptr<IColumn>> m_columns;
-
-        private:
-            template <typename Component>
-            void register_component()
-            {
-                ComponentId component_id = ComponentId::from<Component>();
-                if (m_component_id_to_column_id.find(component_id) == m_component_id_to_column_id.end())
-                {
-                    ColumnId column_id(m_component_id_to_column_id.size());
-                    m_component_id_to_column_id.emplace(component_id, column_id);
-                    std::unique_ptr<Column<Component>> column = std::make_unique<Column<Component>>();
-                    m_columns.emplace_back(std::move(column));
-                }
-            }
-
-            template <typename Component>
-            void add_component(Component component)
-            {
-                ComponentId component_id = ComponentId::from<Component>();
-                ColumnId column_id = m_component_id_to_column_id.at(component_id);
-                Column<Component> *column = static_cast<Column<Component> *>(m_columns[column_id.id()].get());
-                column->emplace_back(component);
-            }
         };
     } // namespace table
 } // namespace carrots_ecs
