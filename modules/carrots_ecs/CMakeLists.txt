@@ -55,6 +55,12 @@ set_target_properties(carrots_ecs PROPERTIES FOLDER "modules/carrots_ecs")
 # Tests
 add_executable(carrots_ecs_tests
     tests/archetype_tests.cpp
+    tests/component_id_tests.cpp
+    tests/entity_tests.cpp
+    tests/query_tests.cpp
+    tests/schedule_tests.cpp
+    tests/table_tests.cpp
+    tests/world_tests.cpp
 )
 
 target_link_libraries(carrots_ecs_tests
