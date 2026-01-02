@@ -2,6 +2,7 @@
 #define CARROTS_ECS_TABLE_TABLE_HPP_
 
 #include <memory>
+#include <ostream>
 #include <unordered_map>
 #include <vector>
 
@@ -99,6 +100,40 @@ namespace carrots_ecs
                     return component_id.hash_code();
                 }
             };
+        private:
+            friend std::ostream &operator<<(std::ostream &os, const Table &other)
+            {
+                os << "Table { ";
+                os << "m_entities_count: " << other.m_entities.size();
+                os << ", ";
+                os << "component_pairs: { ";
+                auto it = other.m_component_id_to_column_id.begin();
+                for(auto it = other.m_component_id_to_column_id.begin(); it != other.m_component_id_to_column_id.end(); ++it)
+                {
+                    if(it != other.m_component_id_to_column_id.begin())
+                    {
+                        os << ", ";
+                    }
+                    auto [component_id, column_id] = *it;
+                    os << "ComponentPair { ";
+                    os << component_id;
+                    os << ", ";
+                    os << column_id;
+                    os << " }";
+                }
+                os << " }, ";
+                os << "column_sizes: { ";
+                for(size_t index = 0; index < other.m_columns.size(); index++)
+                {
+                    if(index != 0)
+                    {
+                        os << ", ";
+                    }
+                    os << "column " << index << ": " << other.m_columns[index]->count();
+                }
+                os << "} }";
+                return os;
+            }
 
         private:
             std::vector<Entity> m_entities;

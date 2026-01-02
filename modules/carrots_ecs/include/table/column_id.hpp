@@ -1,6 +1,8 @@
 #ifndef CARROTS_ECS_TABLE_COLUMN_ID_HPP_
 #define CARROTS_ECS_TABLE_COLUMN_ID_HPP_
 
+#include <iostream>
+
 namespace carrots_ecs
 {
     namespace table
@@ -20,6 +22,12 @@ namespace carrots_ecs
             /// Returns the id of this ColumnId.
             /// @return 
             size_t id() const;
+        private:
+            friend std::ostream &operator<<(std::ostream &os, const ColumnId &other)
+            {
+                os << "ColumnId { " << other.m_id << " }";
+                return os;
+            }
         private:
             size_t m_id;
         };
